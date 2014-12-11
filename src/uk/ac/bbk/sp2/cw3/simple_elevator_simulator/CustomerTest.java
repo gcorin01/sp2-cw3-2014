@@ -77,7 +77,20 @@ public class CustomerTest {
         Customer customer = new Customer(id, desiredFloor);
 
     }
-    
+
+    @Test
+    public void testGetDestinationFloorMethod () {
+        fail("Not yet implemented");
+    } // TODO Add number floors boundary in Customer Class as CONSTANTS derived
+      // by the user input
+
+    @Test
+    public void testGetCurrentFloorMethod () {
+        fail("Not yet implemented");
+    } // TODO Number set by random number generator / possibly this should be an
+      // Interface so that it can be implemented in various ways such as letting
+      // the user decide the destination floor rather than using random numbers
+
     @Test
     public void testInElevatorMethodTrue () {
         fail("Not yet implemented");
@@ -87,7 +100,7 @@ public class CustomerTest {
     public void testInElevatorMethodFalse () {
         fail("Not yet implemented");
     }
-    
+
     @Test
     public void testFinishedMethodFalse () {
         fail("Not yet implemented");
@@ -95,16 +108,6 @@ public class CustomerTest {
 
     @Test
     public void testFinishedMethodTrue () {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testGetDestinationFloorMethod () {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testGetCurrentFloorMethod () {
         fail("Not yet implemented");
     }
 
