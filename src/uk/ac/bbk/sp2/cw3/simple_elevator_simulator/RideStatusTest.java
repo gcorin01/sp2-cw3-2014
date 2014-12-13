@@ -20,18 +20,12 @@ public class RideStatusTest {
 	rideStatus = new MockRideStatus();
     }
 
+    @Test
+    public void testRideStatusMethodMove() {
+	    rideStatus.move();
+    }
+
 /*    @Test
-    public void testRideStausClassExistance() {
-	@SuppressWarnings("unused")
-	MockRideStatus rideStatus = new MockRideStatus();
-    }
-
-    @Test
-    public void test() {
-	fail("Not yet implemented");
-    }
-
-    @Test
     public void test() {
 	fail("Not yet implemented");
     }
