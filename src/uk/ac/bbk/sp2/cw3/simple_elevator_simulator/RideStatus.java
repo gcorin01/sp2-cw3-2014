@@ -9,14 +9,8 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public abstract class RideStatus {
 
-    public void move() {
-	// TODO Auto-generated method stub
-	
-    }
+    public abstract void move();
 
-    public void selectElevatorCommand() {
-	// TODO Auto-generated method stub
-	
-    }
+    public abstract void selectElevatorCommand();
 
 }
