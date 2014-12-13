@@ -3,8 +3,10 @@
  */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -13,20 +15,22 @@ import org.junit.Test;
  */
 public class AwaitingElevatorStatusTest {
 
-    /**
-     * Test method for {@link uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatusTest#setUp()}.
-     */
-    @Test
-    public void testSetUp() {
-	fail("Not yet implemented");
-    }
+    RideStatus rideStatus;
 
+    @Before
+    public void setUp() {
+	rideStatus = new AwaitingElevatorStatus();
+    }
+    
+    
     /**
      * Test method for {@link uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatusTest#testRideStatusMethodMove()}.
      */
     @Test
     public void testTestRideStatusMethodMove() {
-	fail("Not yet implemented");
+	
+	AwaitingElevatorStatus awaitingElevatorStatus = new AwaitingElevatorStatus();
+	awaitingElevatorStatus.move();
     }
 
     /**

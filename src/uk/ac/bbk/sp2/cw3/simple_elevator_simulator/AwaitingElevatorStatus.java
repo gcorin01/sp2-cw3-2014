@@ -11,7 +11,7 @@ public class AwaitingElevatorStatus extends RideStatus {
     
     @Override
     public void move() {
-	// TODO Auto-generated method stub
+	Elevator.customersOnBoardCount ++;
 	
     }
 
