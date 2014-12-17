@@ -6,6 +6,8 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatus;
+
 /**
  * @author Gabriel
  *
