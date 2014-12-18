@@ -6,7 +6,7 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 import org.junit.Before;
 import org.junit.Test;
 
-import uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatus;
+import uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideState;
 
 /**
  * @author Gabriel
@@ -14,7 +14,7 @@ import uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatus;
  */
 public class RideStatusTest {
 
-    RideStatus rideStatus;
+    RideState rideStatus;
 
     @Before
     public void setUp() {
