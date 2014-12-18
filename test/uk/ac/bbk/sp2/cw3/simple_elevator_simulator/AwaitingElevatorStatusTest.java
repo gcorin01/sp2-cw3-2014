@@ -18,20 +18,17 @@ public class AwaitingElevatorStatusTest {
     public void setUp() {
 	rideStatus = new AwaitingElevatorStatus();
     }
-    
+
     @Test
-    public void testTestRideStatusMethodMove() {
-	
-	
-	Elevator elevator = Mockto;
-	AwaitingElevatorStatus awaitingElevatorStatus = new AwaitingElevatorStatus(elevator);
+    public void testRideStatusMethodMove() {
+
+	AwaitingElevatorStatus awaitingElevatorStatus = new AwaitingElevatorStatus();
 	awaitingElevatorStatus.move();
     }
 
-/*
-    @Test
-    public void testTestRideStatusMethodSelectElevatorCommand() {
-	fail("Not yet implemented");
-    }*/
+
+//     @Test public void testTestRideStatusMethodSelectElevatorCommand() {
+//     fail("Not yet implemented"); }
+//     
 
 }

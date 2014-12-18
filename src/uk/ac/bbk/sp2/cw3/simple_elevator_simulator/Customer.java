@@ -2,6 +2,7 @@
  * 
  */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
+import java.util.Random;
 
 /**
  * @author Gabriel
@@ -9,11 +10,19 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class Customer {
     private int id;
-    private int desiredFloor;
+    int desiredFloor;
 
-    public Customer(int id, int desiredFloor) {
+    public Customer(int id) {
 	setId(id);
-	setDesiredFloor(desiredFloor);
+    }
+
+    public void setDesiredFloor() {
+	// TODO set MAX and MIN floor number in Building class
+	int max = 10;
+	int min = 0;
+	
+	Random r = new Random();
+	desiredFloor = r.ints(1, min, max).findFirst().getAsInt();
     }
 
     /**
@@ -36,14 +45,6 @@ public class Customer {
      */
     public int getDesiredFloor() {
 	return desiredFloor;
-    }
-
-    /**
-     * @param desiredFloor
-     *            the desiredFloor to set
-     */
-    public void setDesiredFloor(int desiredFloor) {
-	this.desiredFloor = desiredFloor;
     }
 
     public static int getCurrentFloor() {

@@ -11,7 +11,7 @@ import org.junit.Test;
  * @author Gabriel
  *
  */
-public class CustomersTest {
+public class CustomerTest {
 
     @Test
     public void testCustomerClassExistance () {

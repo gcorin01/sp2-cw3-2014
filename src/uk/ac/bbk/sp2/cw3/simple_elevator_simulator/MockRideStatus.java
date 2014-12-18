@@ -11,8 +11,8 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class MockRideStatus extends RideStatus {
 
-    @Override
     public void move() {
+    @Override
 	// TODO Auto-generated method stub
 	
     }

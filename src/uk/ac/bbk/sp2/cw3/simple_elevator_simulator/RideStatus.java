@@ -9,8 +9,8 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public abstract class RideStatus {
 
-    public abstract void move();
+    public abstract void selectElevatorCommand(Customer cust);
 
-    public abstract void selectElevatorCommand();
+    public abstract void move(Customer cust);
 
 }
