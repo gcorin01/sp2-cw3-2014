@@ -5,24 +5,20 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 import java.util.Random;
 
 /**
- * @author Gabriel
+ * @author gcorin01
  *
  */
 public class Customer {
     private int id;
-    int desiredFloor;
+    private RideState stateVar;
+    private int desiredFloor;
 
     public Customer(int id) {
-	setId(id);
-    }
-
-    public void setDesiredFloor() {
-	// TODO set MAX and MIN floor number in Building class
-	int max = 10;
-	int min = 0;
+	setId(id); // ID comes from customerList index created in Building
+	setDesiredFloor();
 	
-	Random r = new Random();
-	desiredFloor = r.ints(1, min, max).findFirst().getAsInt();
+	this.stateVar = RideState.awaitingElevator;
+	    stateVar.stateEnter(this);
     }
 
     /**
@@ -31,7 +27,7 @@ public class Customer {
     public int getId() {
 	return id;
     }
-
+    
     /**
      * @param id
      *            the id to set
@@ -39,7 +35,7 @@ public class Customer {
     public void setId(int id) {
 	this.id = id;
     }
-
+    
     /**
      * @return the desiredFloor
      */
@@ -47,25 +43,29 @@ public class Customer {
 	return desiredFloor;
     }
 
-    public static int getCurrentFloor() {
-	// TODO Auto-generated method stub
-	return 0;
+    public void setDesiredFloor() {
+	// TODO change this method so that the implementation of the random number is moved outside of this class
+	// TODO set MAX and MIN floor number in Building class
+	int max = 10;
+	int min = 0;
+	
+	Random r = new Random();
+	this.desiredFloor = r.ints(1, min, max).findFirst().getAsInt();
     }
 
-    public static int getDestinationFloor() {
-	// TODO Auto-generated method stub
-	return 0;
+
+    void move(Customer cust) {
+	
     }
 
-    public boolean inElevator() {
-	return false;
-	// TODO Auto-generated method stub
-
+    void selectElevatorCommand(Customer cust) {
+	
     }
 
-    public boolean arrived() {
-	// TODO Auto-generated method stub
-	return false;
+    // Set the new state
+    public void setState(RideState newState) {
+	stateVar.stateExit(this);
+	this.stateVar = newState;
+	stateVar.stateEnter(this);
     }
-
 }

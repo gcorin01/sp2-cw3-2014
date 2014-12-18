@@ -12,8 +12,8 @@ public abstract class RideState {
     static final RideState awaitingElevator = new AwaitingElevatorState();
     static final RideState inElevator = new OnboardElevatorState();
 
-    protected RideState() {
-	if (initialState == null) initialState = this;
+	protected RideState() {
+	    if (initialState == null) initialState = this;
     }
 
     public abstract void selectElevatorCommand(Customer cust);

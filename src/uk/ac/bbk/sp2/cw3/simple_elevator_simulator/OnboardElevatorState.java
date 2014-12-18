@@ -4,7 +4,7 @@
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
- * @author Gabriel
+ * @author gcorin01
  *
  */
 public class OnboardElevatorState extends RideState {

@@ -12,22 +12,23 @@ import org.junit.Test;
  */
 public class AwaitingElevatorStatusTest {
 
-    RideStatus rideStatus;
+    RideState rideStatus;
 
     @Before
     public void setUp() {
-	rideStatus = new AwaitingElevatorStatus();
+	rideStatus = new AwaitingElevatorState();
     }
 
     @Test
     public void testRideStatusMethodMove() {
 
-	AwaitingElevatorStatus awaitingElevatorStatus = new AwaitingElevatorStatus();
+	AwaitingElevatorState awaitingElevatorStatus = new AwaitingElevatorState();
 	awaitingElevatorStatus.move();
+	
     }
 
 
-//     @Test public void testTestRideStatusMethodSelectElevatorCommand() {
+//     @Test public void testRideStatusMethodSelectElevatorCommand() {
 //     fail("Not yet implemented"); }
 //     
 
