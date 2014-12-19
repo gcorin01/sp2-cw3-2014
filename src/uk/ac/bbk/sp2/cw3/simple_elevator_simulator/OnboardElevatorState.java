@@ -14,7 +14,7 @@ public class OnboardElevatorState extends RideState {
      */
     @Override
 	// TODO Auto-generated method stub
-    public void selectElevatorCommand(Customer cust) {
+    public void pressElevatorButton(Customer cust) {
 
     }
 

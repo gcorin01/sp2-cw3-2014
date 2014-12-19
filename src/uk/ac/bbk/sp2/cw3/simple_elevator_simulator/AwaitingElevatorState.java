@@ -8,27 +8,31 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  *
  */
 public class AwaitingElevatorState extends RideState {
+    private int atFloorNumber; // Floor number at which the customer is waiting
+                               // for the elevator
 
-    @Override
-    public void move(Customer cust) {
-	if (Elevator.currentFloor == cust.getDesiredFloor()) {
-	    // TODO trigger customerJoins in Elevator class
-	    cust.setState(inElevator);
-	}
+    public AwaitingElevatorState(Customer cust) {
+        // TODO Auto-generated constructor stub
     }
 
     @Override
-    public void selectElevatorCommand(Customer cust) {
-	callElevator(desiredFloor);
+    public void move (Customer cust) {
+        if (Elevator.currentFloor == atFloorNumber) {
+            // TODO trigger customerJoins in Elevator class
+            // change state to OnboardElevator;
+        }
     }
 
     @Override
-    protected void stateExit(Customer cust) {
-
+    public void pressElevatorButton (Customer cust) {
+        callElevator(cust);
     }
 
-    @Override
-    protected void stateEnter(Customer cust) {
-
+    private void callElevator (Customer cust) {
+        Elevator.requestedFloorToStop.add(cust.atFloorNumber);
+        
+        System.out.println("Customer " + cust.getId()
+                + " is waiting for the elevator at floor number "
+                + cust.atFloorNumber);
     }
 }
