@@ -4,13 +4,19 @@
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
- * @author Gabriel
+ * @author gcorin01
  *
  */
 public abstract class RideState {
 
-    public abstract void pressElevatorButton(Customer cust);
+    protected Customer customer;
 
-    public abstract void move(Customer cust);
+    public abstract void pressElevatorButton();
+
+    public abstract void move();
+    
+    public abstract void setStateToAwaitingElevator();
+    
+    public abstract void setStateToOnboardElevator();
 
 }

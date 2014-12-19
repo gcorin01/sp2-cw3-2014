@@ -9,31 +9,45 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class OnboardElevatorState extends RideState {
 
-    /* (non-Javadoc)
-     * @see uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatus#selectElevatorCommand(uk.ac.bbk.sp2.cw3.simple_elevator_simulator.Customer)
-     */
-    @Override
-	// TODO Auto-generated method stub
-    public void pressElevatorButton(Customer cust) {
-
-    }
-
-    /* (non-Javadoc)
-     * @see uk.ac.bbk.sp2.cw3.simple_elevator_simulator.RideStatus#move(uk.ac.bbk.sp2.cw3.simple_elevator_simulator.Customer)
-     */
-    @Override
-	// TODO Auto-generated method stub
-    public void move(Customer cust) {
-
+    public OnboardElevatorState(RideState rideState) {
+        this.customer = rideState.customer;
     }
 
     @Override
-    protected void stateExit(Customer cust) {
-	
+    // TODO Auto-generated method stub
+    public void pressElevatorButton () {
+        setDesiredFloor();
+    }
+
+    private void setDesiredFloor () {
+        Elevator.requestedFloorToStop.add(customer.toFloorNumber);
+
+        System.out.println("Customer " + customer.getId()
+                + " requested to be taken to floor number "
+                + customer.toFloorNumber);
     }
 
     @Override
-    protected void stateEnter(Customer cust) {
-    
+    public void move () {
+        exitElevator();
+
+    }
+
+    private void exitElevator () {
+        // TODO Remove customer from Elevator registerList
+        
+    }
+
+    @Override
+    public void setStateToAwaitingElevator () {
+        // No need to implement as the customer has just finished waiting for
+        // the elevator
+
+    }
+
+    @Override
+    public void setStateToOnboardElevator () {
+        // No need to implement as this is already the current RideState
+
     }
 }

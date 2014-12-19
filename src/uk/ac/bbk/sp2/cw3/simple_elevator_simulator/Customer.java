@@ -11,20 +11,22 @@ import java.util.Random;
  */
 public class Customer {
     private int       id;
-    private RideState stateVar;
+    private RideState rideState;
     int               atFloorNumber;
     int               toFloorNumber;
 
     public Customer(int id) {
         setId(id); // ID comes from customerList index created in Building
         // setDesiredFloor(); this needs to be controlled by the OnboardElevator
+
         this.atFloorNumber = getFloorNumber();
-        initialiseCustomer(this);
+        initialiseCustomer();
     }
 
-    private void initialiseCustomer (Customer cust) {
-        this.stateVar = new AwaitingElevatorState(cust);
-        stateVar.pressElevatorButton(cust);
+    private void initialiseCustomer () {
+        setRideState(new AwaitingElevatorState(getRideState()));
+
+        getRideState().pressElevatorButton();
     }
 
     /**
@@ -64,11 +66,17 @@ public class Customer {
         return floorNumber = r.ints(1, min, max).findFirst().getAsInt();
     }
 
-    void move (Customer cust) {
-
+    /**
+     * @return the rideState
+     */
+    public RideState getRideState () {
+        return rideState;
     }
 
-    void pressElevatorButton (Customer cust) {
-
+    /**
+     * @param rideState the rideState to set
+     */
+    void setRideState (RideState rideState) {
+        this.rideState = rideState;
     }
 }

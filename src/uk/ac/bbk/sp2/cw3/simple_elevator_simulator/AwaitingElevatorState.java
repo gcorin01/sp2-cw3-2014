@@ -8,31 +8,42 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  *
  */
 public class AwaitingElevatorState extends RideState {
-    private int atFloorNumber; // Floor number at which the customer is waiting
-                               // for the elevator
 
-    public AwaitingElevatorState(Customer cust) {
-        // TODO Auto-generated constructor stub
+    public AwaitingElevatorState(RideState rideState) {
+        this.customer = rideState.customer;
     }
 
     @Override
-    public void move (Customer cust) {
-        if (Elevator.currentFloor == atFloorNumber) {
+    public void pressElevatorButton () {
+        callElevator();
+    }
+
+    private void callElevator () {
+        Elevator.requestedFloorToStop.add(customer.atFloorNumber);
+
+        System.out.println("Customer " + customer.getId()
+                + " is waiting for the elevator at floor number "
+                + customer.atFloorNumber);
+    }
+
+    @Override
+    public void move () {
+        if (Elevator.currentFloor == customer.atFloorNumber) {
             // TODO trigger customerJoins in Elevator class
             // change state to OnboardElevator;
         }
     }
 
     @Override
-    public void pressElevatorButton (Customer cust) {
-        callElevator(cust);
+    public void setStateToAwaitingElevator () {
+        // No need to implement as this is already the current RideState
     }
 
-    private void callElevator (Customer cust) {
-        Elevator.requestedFloorToStop.add(cust.atFloorNumber);
+    @Override
+    public void setStateToOnboardElevator () {
+        this.customer.setRideState(new OnboardElevatorState(this));
         
-        System.out.println("Customer " + cust.getId()
-                + " is waiting for the elevator at floor number "
-                + cust.atFloorNumber);
+        System.out.println("Customer " + customer.getId()
+                + " is inside the elevator");
     }
 }
