@@ -12,8 +12,8 @@ import java.util.Random;
 public class Customer {
     private int       id;
     private RideState rideState;
-    int               atFloorNumber;
-    int               toFloorNumber;
+    Integer           atFloorNumber;
+    Integer           toFloorNumber;
 
     public Customer(int id) {
         setId(id); // ID comes from customerList index created in Building
@@ -51,9 +51,7 @@ public class Customer {
         return setFloorNumber();
     }
 
-    private int setFloorNumber () {
-        @SuppressWarnings("unused")
-        int floorNumber;
+    private static int setFloorNumber () {
         // TODO Add a functional interface (or SAM interface) to change this
         // method so that the implementation of the random number is moved
         // outside of this class
@@ -63,7 +61,20 @@ public class Customer {
 
         Random r = new Random();
 
-        return floorNumber = r.ints(1, min, max).findFirst().getAsInt();
+        Integer x = r.ints(1, min, max).findFirst().getAsInt();
+
+        Integer y = atFloorNumber;
+
+        Function z = setFloorNumber();
+
+        // Only for setting the destination floor number, check that the
+        // randomly generated toFloorNumber is not the same as the
+        // atFloorNumber (that is, the same floor from which the customer is
+        // calling the elevator).
+        x = (y != null) && (x.toString() == y.toString()) ? setFloorNumber()
+                : x;
+
+        return x;
     }
 
     /**
@@ -74,7 +85,8 @@ public class Customer {
     }
 
     /**
-     * @param rideState the rideState to set
+     * @param rideState
+     *            the rideState to set
      */
     void setRideState (RideState rideState) {
         this.rideState = rideState;

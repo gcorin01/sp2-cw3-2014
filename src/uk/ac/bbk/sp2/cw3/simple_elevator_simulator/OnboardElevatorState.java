@@ -20,6 +20,7 @@ public class OnboardElevatorState extends RideState {
     }
 
     private void setDesiredFloor () {
+        customer.toFloorNumber = customer.getFloorNumber();
         Elevator.requestedFloorToStop.add(customer.toFloorNumber);
 
         System.out.println("Customer " + customer.getId()
@@ -35,7 +36,10 @@ public class OnboardElevatorState extends RideState {
 
     private void exitElevator () {
         // TODO Remove customer from Elevator registerList
-        
+
+        System.out.println("Customer " + customer.getId()
+                + " has arrived and exited the elevator at floor number "
+                + customer.toFloorNumber);
     }
 
     @Override
