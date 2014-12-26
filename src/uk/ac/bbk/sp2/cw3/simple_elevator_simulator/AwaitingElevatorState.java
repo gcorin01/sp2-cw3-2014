@@ -14,12 +14,12 @@ public class AwaitingElevatorState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton (Integer atFloorNumber) {
+    public void pressElevatorButton (String atFloorNumber) {
         callElevator(atFloorNumber);
     }
 
-    private void callElevator (Integer atFloorNumber) {
-        Elevator.requestedFloorToStop.add(atFloorNumber);
+    private void callElevator (String atFloorNumber) {
+        Elevator.requestedFloorToStop.add(Integer.parseInt(atFloorNumber));
 
         System.out
                 .println("A customer is waiting for the elevator at floor number "
@@ -34,7 +34,7 @@ public class AwaitingElevatorState extends RideState {
 
     public RideState setStateToOnboardElevator () {
         System.out.println("A customer has borded the elevator");
-        
+
         return new OnboardElevatorState();
     }
 }

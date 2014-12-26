@@ -14,12 +14,12 @@ public class OnboardElevatorState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton (Integer toFloorNumber) {
+    public void pressElevatorButton (String toFloorNumber) {
         setDesiredFloor(toFloorNumber);
     }
 
-    private void setDesiredFloor (Integer toFloorNumber) {
-        Elevator.requestedFloorToStop.add(toFloorNumber);
+    private void setDesiredFloor (String toFloorNumber) {
+        Elevator.requestedFloorToStop.add(Integer.parseInt(toFloorNumber));
 
         System.out.println("A customer requested to be taken to floor number "
                 + toFloorNumber);

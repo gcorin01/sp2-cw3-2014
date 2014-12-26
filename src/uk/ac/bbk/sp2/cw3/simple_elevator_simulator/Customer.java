@@ -12,20 +12,24 @@ import java.util.Random;
 public class Customer {
     private int       id               = 0;
     private RideState currentRideState = null;
-    private Integer   atFloorNumber    = null;
-    private Integer   toFloorNumber    = null;
+
+    // private Integer toFloorNumber = null;
 
     public Customer(int id) {
-        setId(id); // ID comes from customerList index created in Building
+        // ID comes from customerList index created in Building
         // setDesiredFloor(); this needs to be controlled by the OnboardElevator
+        setId(id);
 
-        this.atFloorNumber = getFloorNumber();
-        System.out.println(this.atFloorNumber); // TODO Remove debug line
+        // In a real world scenario, it would be the actual button pressed by
+        // the Customer which determines at which floor the elevator has been
+        // called from
+        String atFloorNumber = getFloorNumber();
+        System.out.println(atFloorNumber); // TODO Remove debug line
 
-        initialiseCustomer(this.atFloorNumber);
+        initialiseCustomer(atFloorNumber);
     }
 
-    private void initialiseCustomer (Integer atFloorNumber) {
+    private void initialiseCustomer (String atFloorNumber) {
         setRideState(new AwaitingElevatorState());
 
         this.currentRideState.pressElevatorButton(atFloorNumber);
@@ -49,31 +53,33 @@ public class Customer {
     /**
      * @return the atFloorNumber or toFloorNumber
      */
-    public int getFloorNumber () {
+    public String getFloorNumber () {
         return setFloorNumber();
     }
 
-    private int setFloorNumber () {
+    private String setFloorNumber () {
         // TODO Add a functional interface (or SAM interface) to change this
         // method so that the implementation of the random number is moved
         // outside of this class
         // TODO set MAX and MIN floor number in Building class
-        int max = 10;
-        int min = 0;
+        int max = Building.MAX_FLOOR_NUMBER;
+        int min = Building.MIN_FLOOR_NUMBER;
 
         Random r = new Random();
 
-        Integer x = r.ints(1, min, max).findFirst().getAsInt();
+        String x = Integer.toString(r.ints(1, min, max).findFirst().getAsInt());
 
-        Integer y = atFloorNumber;
+        String y = Integer.toString(Elevator.currentFloor);
 
-        Integer z = setFloorNumber();
+        String z = Integer.toString(Building.FLOOR_TO_IGNORE);
 
-        // Only when setting the destination floor number, check that the
-        // randomly generated toFloorNumber is not the same as the
-        // atFloorNumber (that is, the same floor from which the customer is
-        // calling the elevator).
-        x = (y != null) && (x.toString() == y.toString()) ? z : x;
+        String a = setFloorNumber();
+
+        // Check that when setting the randomly generated floor number, the
+        // number is not the same as the floor from which the customer is
+        // calling the elevator and that the random number is not a floor that
+        // the Building class requests to ignore.
+        x = (x == y) || (x == z) ? a : x;
 
         return x;
     }
@@ -94,12 +100,16 @@ public class Customer {
     }
 
     public void move () {
-        // TODO trigger customerJoins in Elevator class
-        this.currentRideState = this.currentRideState.move();
+        // Customer either enters or exit the elevator
+        this.currentRideState = currentRideState.move();
     }
 
     public void pressElevatorButton () {
-        this.toFloorNumber = getFloorNumber();
-        this.currentRideState.pressElevatorButton(toFloorNumber);
+        // In a real case scenario, it would be the actual button pressed by the
+        // Customer which would determine either the floor number or any other
+        // button/function available to be selected within the elevator
+        String command = getFloorNumber();
+
+        this.currentRideState.pressElevatorButton(command);
     }
 }

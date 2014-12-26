@@ -9,11 +9,10 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public abstract class RideState {
 
-    // protected Customer customer;
-    protected RideState awaitingElevatorState;
-    protected RideState onboardElevatorState;
+    //protected RideState awaitingElevatorState;
+    //protected RideState onboardElevatorState;
 
-    public abstract void pressElevatorButton (Integer floorNumber);
+    public abstract void pressElevatorButton (String command);
 
     public abstract RideState move ();
 }
