@@ -9,12 +9,12 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class AwaitingElevatorState extends RideState {
 
-    public AwaitingElevatorState(RideState rideState) {
-        this.customer = rideState.customer;
+    public AwaitingElevatorState() {
+
     }
 
     @Override
-    public void pressElevatorButton () {
+    public void pressElevatorButton () { 
         callElevator();
     }
 
@@ -28,10 +28,8 @@ public class AwaitingElevatorState extends RideState {
 
     @Override
     public void move () {
-        if (Elevator.currentFloor == customer.atFloorNumber) {
-            // TODO trigger customerJoins in Elevator class
-            // change state to OnboardElevator;
-        }
+        // TODO trigger customerJoins in Elevator class
+        setStateToOnboardElevator();
     }
 
     @Override
@@ -42,7 +40,7 @@ public class AwaitingElevatorState extends RideState {
     @Override
     public void setStateToOnboardElevator () {
         this.customer.setRideState(new OnboardElevatorState(this));
-        
+
         System.out.println("Customer " + customer.getId()
                 + " is inside the elevator");
     }

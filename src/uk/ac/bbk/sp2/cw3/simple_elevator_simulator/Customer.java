@@ -11,20 +11,21 @@ import java.util.Random;
  */
 public class Customer {
     private int       id;
-    private RideState rideState;
-    Integer           atFloorNumber;
-    Integer           toFloorNumber;
+    private RideState currentRideState;
+    private Integer           atFloorNumber;
+    private Integer           toFloorNumber;
 
     public Customer(int id) {
         setId(id); // ID comes from customerList index created in Building
         // setDesiredFloor(); this needs to be controlled by the OnboardElevator
 
         this.atFloorNumber = getFloorNumber();
+
         initialiseCustomer();
     }
 
     private void initialiseCustomer () {
-        setRideState(new AwaitingElevatorState(getRideState()));
+        setRideState(new AwaitingElevatorState());
 
         getRideState().pressElevatorButton();
     }
@@ -51,7 +52,7 @@ public class Customer {
         return setFloorNumber();
     }
 
-    private static int setFloorNumber () {
+    private int setFloorNumber () {
         // TODO Add a functional interface (or SAM interface) to change this
         // method so that the implementation of the random number is moved
         // outside of this class
@@ -65,14 +66,13 @@ public class Customer {
 
         Integer y = atFloorNumber;
 
-        Function z = setFloorNumber();
+        //int z = setFloorNumber();
 
-        // Only for setting the destination floor number, check that the
+        // Only when setting the destination floor number, check that the
         // randomly generated toFloorNumber is not the same as the
         // atFloorNumber (that is, the same floor from which the customer is
         // calling the elevator).
-        x = (y != null) && (x.toString() == y.toString()) ? setFloorNumber()
-                : x;
+        x = (y != null) && (x.toString() == y.toString()) ? setFloorNumber() : x;
 
         return x;
     }
@@ -81,14 +81,14 @@ public class Customer {
      * @return the rideState
      */
     public RideState getRideState () {
-        return rideState;
+        return currentRideState;
     }
 
     /**
-     * @param rideState
+     * @param currentRideState
      *            the rideState to set
      */
-    void setRideState (RideState rideState) {
-        this.rideState = rideState;
+    void setRideState (RideState currentRideState) {
+        this.currentRideState = currentRideState;
     }
 }

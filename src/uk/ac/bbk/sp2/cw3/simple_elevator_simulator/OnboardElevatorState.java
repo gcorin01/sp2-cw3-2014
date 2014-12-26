@@ -14,13 +14,13 @@ public class OnboardElevatorState extends RideState {
     }
 
     @Override
-    // TODO Auto-generated method stub
     public void pressElevatorButton () {
         setDesiredFloor();
     }
 
     private void setDesiredFloor () {
-        customer.toFloorNumber = customer.getFloorNumber();
+        this.customer.toFloorNumber = customer.getFloorNumber();
+        
         Elevator.requestedFloorToStop.add(customer.toFloorNumber);
 
         System.out.println("Customer " + customer.getId()
@@ -35,8 +35,9 @@ public class OnboardElevatorState extends RideState {
     }
 
     private void exitElevator () {
-        // TODO Remove customer from Elevator registerList
-
+        // TODO Remove customer from Elevator customerLeaves(customer) > registerList
+        
+        
         System.out.println("Customer " + customer.getId()
                 + " has arrived and exited the elevator at floor number "
                 + customer.toFloorNumber);
