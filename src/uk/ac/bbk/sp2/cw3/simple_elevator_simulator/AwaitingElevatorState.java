@@ -14,34 +14,27 @@ public class AwaitingElevatorState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton () { 
-        callElevator();
+    public void pressElevatorButton (Integer atFloorNumber) {
+        callElevator(atFloorNumber);
     }
 
-    private void callElevator () {
-        Elevator.requestedFloorToStop.add(customer.atFloorNumber);
+    private void callElevator (Integer atFloorNumber) {
+        Elevator.requestedFloorToStop.add(atFloorNumber);
 
-        System.out.println("Customer " + customer.getId()
-                + " is waiting for the elevator at floor number "
-                + customer.atFloorNumber);
+        System.out
+                .println("A customer is waiting for the elevator at floor number "
+                        + atFloorNumber);
     }
 
     @Override
-    public void move () {
+    public RideState move () {
         // TODO trigger customerJoins in Elevator class
-        setStateToOnboardElevator();
+        return setStateToOnboardElevator();
     }
 
-    @Override
-    public void setStateToAwaitingElevator () {
-        // No need to implement as this is already the current RideState
-    }
-
-    @Override
-    public void setStateToOnboardElevator () {
-        this.customer.setRideState(new OnboardElevatorState(this));
-
-        System.out.println("Customer " + customer.getId()
-                + " is inside the elevator");
+    public RideState setStateToOnboardElevator () {
+        System.out.println("A customer has borded the elevator");
+        
+        return new OnboardElevatorState();
     }
 }

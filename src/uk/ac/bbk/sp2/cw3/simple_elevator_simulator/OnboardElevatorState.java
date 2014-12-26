@@ -9,50 +9,34 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class OnboardElevatorState extends RideState {
 
-    public OnboardElevatorState(RideState rideState) {
-        this.customer = rideState.customer;
+    public OnboardElevatorState() {
+
     }
 
     @Override
-    public void pressElevatorButton () {
-        setDesiredFloor();
+    public void pressElevatorButton (Integer toFloorNumber) {
+        setDesiredFloor(toFloorNumber);
     }
 
-    private void setDesiredFloor () {
-        this.customer.toFloorNumber = customer.getFloorNumber();
-        
-        Elevator.requestedFloorToStop.add(customer.toFloorNumber);
+    private void setDesiredFloor (Integer toFloorNumber) {
+        Elevator.requestedFloorToStop.add(toFloorNumber);
 
-        System.out.println("Customer " + customer.getId()
-                + " requested to be taken to floor number "
-                + customer.toFloorNumber);
+        System.out.println("A customer requested to be taken to floor number "
+                + toFloorNumber);
     }
 
     @Override
-    public void move () {
+    public RideState move () {
         exitElevator();
-
+        
+        // Customer has arrived to the desired floor and can be destroyed
+        return null;
     }
 
     private void exitElevator () {
-        // TODO Remove customer from Elevator customerLeaves(customer) > registerList
-        
-        
-        System.out.println("Customer " + customer.getId()
-                + " has arrived and exited the elevator at floor number "
-                + customer.toFloorNumber);
-    }
+        // TODO Remove customer from Elevator customerLeaves(customer) >
+        // registerList
 
-    @Override
-    public void setStateToAwaitingElevator () {
-        // No need to implement as the customer has just finished waiting for
-        // the elevator
-
-    }
-
-    @Override
-    public void setStateToOnboardElevator () {
-        // No need to implement as this is already the current RideState
-
+        System.out.println("A customer has exited the elevator");
     }
 }

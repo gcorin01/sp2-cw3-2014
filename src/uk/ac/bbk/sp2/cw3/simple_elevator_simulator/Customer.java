@@ -10,24 +10,25 @@ import java.util.Random;
  *
  */
 public class Customer {
-    private int       id;
-    private RideState currentRideState;
-    private Integer           atFloorNumber;
-    private Integer           toFloorNumber;
+    private int       id               = 0;
+    private RideState currentRideState = null;
+    private Integer   atFloorNumber    = null;
+    private Integer   toFloorNumber    = null;
 
     public Customer(int id) {
         setId(id); // ID comes from customerList index created in Building
         // setDesiredFloor(); this needs to be controlled by the OnboardElevator
 
         this.atFloorNumber = getFloorNumber();
+        System.out.println(this.atFloorNumber); // TODO Remove debug line
 
-        initialiseCustomer();
+        initialiseCustomer(this.atFloorNumber);
     }
 
-    private void initialiseCustomer () {
+    private void initialiseCustomer (Integer atFloorNumber) {
         setRideState(new AwaitingElevatorState());
 
-        getRideState().pressElevatorButton();
+        this.currentRideState.pressElevatorButton(atFloorNumber);
     }
 
     /**
@@ -66,13 +67,13 @@ public class Customer {
 
         Integer y = atFloorNumber;
 
-        //int z = setFloorNumber();
+        Integer z = setFloorNumber();
 
         // Only when setting the destination floor number, check that the
         // randomly generated toFloorNumber is not the same as the
         // atFloorNumber (that is, the same floor from which the customer is
         // calling the elevator).
-        x = (y != null) && (x.toString() == y.toString()) ? setFloorNumber() : x;
+        x = (y != null) && (x.toString() == y.toString()) ? z : x;
 
         return x;
     }
@@ -90,5 +91,15 @@ public class Customer {
      */
     void setRideState (RideState currentRideState) {
         this.currentRideState = currentRideState;
+    }
+
+    public void move () {
+        // TODO trigger customerJoins in Elevator class
+        this.currentRideState = this.currentRideState.move();
+    }
+
+    public void pressElevatorButton () {
+        this.toFloorNumber = getFloorNumber();
+        this.currentRideState.pressElevatorButton(toFloorNumber);
     }
 }
