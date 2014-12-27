@@ -10,19 +10,20 @@ import java.util.Random;
  *
  */
 public class Building {
-    
-    public static final int FLOOR_TO_IGNORE = 13;
+
+    public static final int FLOOR_TO_IGNORE  = 13;
     public static final int MIN_FLOOR_NUMBER = 0;
-    public static final int MAX_FLOOR_NUMBER = 20; // TODO obtain from user input
-    Customer customer = null;
-    
+    public static final int MAX_FLOOR_NUMBER = 20;  // TODO obtain from user
+                                                     // input
+    Customer                customer         = null;
+
     /**
      * @return the atFloorNumber or toFloorNumber
      */
     public static String getFloorNumber (Customer customer) {
         return setFloorNumber(customer);
     }
-    
+
     static String setFloorNumber (Customer customer) {
         // TODO Add a functional interface (or SAM interface) to change this
         // method so that the implementation of the random number is moved

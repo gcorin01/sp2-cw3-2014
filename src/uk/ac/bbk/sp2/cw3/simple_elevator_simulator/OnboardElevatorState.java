@@ -8,39 +8,48 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  *
  */
 public class OnboardElevatorState extends RideState {
-    public String flag = null;
 
     public OnboardElevatorState() {
-        this.flag = "In Elevator";
+        this.flagDescription = "In Elevator";
     }
 
     @Override
-    public void pressElevatorButton (Customer customer, String command) {
-        setDesiredFloor(customer, command);
-    }
+    public void pressElevatorButton (Customer customer, String command)
+            throws Exception {
+        try {
+            // Command is to select the desired floor which is
+            // customer.toFloorNumber
+            int n = Integer.parseInt(command);
 
-    private void setDesiredFloor (Customer customer, String command) {
-        // Command is the customer.toFloorNumber
-        int n = Integer.parseInt(command);
-                
-        Elevator.requestedFloorToStop.add(n);
+            Elevator.requestedFloorToStop.add(n);
 
-        System.out.println("A customer #" + customer.getId()
-                + " requested to be taken to floor number " + n);
+            System.out.println("A customer #" + customer.getId()
+                    + " requested to be taken to floor number " + n);
+        } catch (Exception e) {
+            System.err.println("A customer #" + customer.getId()
+                    + " could not select the desired floor.");
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public RideState move () {
-        exitElevator();
+    public RideState move (Customer customer) throws Exception {
+        try {
+            // Customer exit the Elevator
+            // TODO Remove customer from Elevator customerLeaves(customer) >
+            // registerList
 
-        // Customer has arrived to the desired floor and can be destroyed
-        return new ArrivedState();
-    }
+            // Customer has arrived to the desired floor
+            System.out.println("A customer #" + customer.getId()
+                    + " has exited the elevator");
 
-    private void exitElevator () {
-        // TODO Remove customer from Elevator customerLeaves(customer) >
-        // registerList
+            return new ArrivedState();
+        } catch (Exception e) {
+            System.err.println("Customer #" + customer.getId()
+                    + " cannot be moved.");
+            e.printStackTrace();
 
-        System.out.println("A customer has exited the elevator");
+            return customer.getRideState();
+        }
     }
 }

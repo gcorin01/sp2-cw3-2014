@@ -14,7 +14,7 @@ public class Customer {
     private String    atFloorNumber    = null;
     private String    toFloorNumber    = null;
 
-    public Customer() {
+    public Customer() throws Exception {
         count++;
         setId(count);
 
@@ -27,7 +27,7 @@ public class Customer {
         initialiseCustomer(this.atFloorNumber);
     }
 
-    private void initialiseCustomer (String atFloorNumber) {
+    private void initialiseCustomer (String atFloorNumber) throws Exception {
         setRideState(new AwaitingElevatorState());
 
         this.currentRideState.pressElevatorButton(this, atFloorNumber);
@@ -99,16 +99,27 @@ public class Customer {
         return this.toFloorNumber;
     }
 
-    public void move () {
+    public void move () throws Exception {
         // Currently Customer can either enters or exit the elevator
-        this.currentRideState = currentRideState.move();
+        
+        try {
+            this.currentRideState = currentRideState.move(this);
+        } catch (Exception e) {
+            System.err.println("Customer cannot be moved.");
+            e.printStackTrace();
+        }
     }
 
-    public void pressElevatorButton (String command) {
+    public void pressElevatorButton (String command) throws Exception {
         // In a real case scenario, it would be the actual button pressed by the
         // Customer which would determine either the floor number or any other
         // function available to be selected within the elevator
 
-        this.currentRideState.pressElevatorButton(this, command);
+        try {
+            this.currentRideState.pressElevatorButton(this, command);
+        } catch (Exception e) {
+            System.err.println("Command not recognised.");
+            e.printStackTrace();
+        }
     }
 }

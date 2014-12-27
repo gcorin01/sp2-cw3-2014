@@ -5,7 +5,6 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -17,24 +16,30 @@ import org.junit.Test;
 public class CustomerTest {
 
     @Test
-    public void testCustomerClassExistance () {
-        @SuppressWarnings("unused")
+    public void testCustomerClassExistance () throws Exception {
         Customer customer1 = new Customer();
-        
+
         assertTrue(customer1 != null);
     }
 
     @Test
-    public void testCustomerAtFloorNumberExistance () {
+    public void testCustomerStateFlagName () throws Exception {
+        Customer customer1 = new Customer();
+
+        assertTrue(customer1.getRideState().flagDescription == "Awaiting Elevator");
+    }
+
+    @Test
+    public void testCustomerAtFloorNumberExistance () throws Exception {
         Customer customer2 = new Customer();
 
         String s = customer2.getAtFloorNumber();
-        
+
         assertTrue(s != null);
     }
 
     @Test
-    public void testCustomerAtFloorNumberIsNot13 () {
+    public void testCustomerAtFloorNumberIsNot13 () throws Exception {
         Customer customer3 = new Customer();
 
         String s = customer3.getAtFloorNumber();
@@ -42,7 +47,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerAtFloorNumberIsNotOutOfRangeMax () {
+    public void testCustomerAtFloorNumberIsNotOutOfRangeMax () throws Exception {
         Customer customer4 = new Customer();
 
         int max = Building.MAX_FLOOR_NUMBER;
@@ -52,7 +57,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerAtFloorNumberIsNotOutOfRangeMin () {
+    public void testCustomerAtFloorNumberIsNotOutOfRangeMin () throws Exception {
         Customer customer5 = new Customer();
 
         int min = Building.MIN_FLOOR_NUMBER;
@@ -62,7 +67,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerToFloorNumberExistance () {
+    public void testCustomerToFloorNumberExistance () throws Exception {
         Customer customer6 = new Customer();
 
         String s = customer6.getToFloorNumber();
@@ -71,7 +76,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNot13 () {
+    public void testCustomerToFloorNumberIsNot13 () throws Exception {
         Customer customer7 = new Customer();
 
         String s = customer7.getToFloorNumber();
@@ -79,7 +84,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNotOutOfRangeMax () {
+    public void testCustomerToFloorNumberIsNotOutOfRangeMax () throws Exception {
         Customer customer8 = new Customer();
 
         int max = Building.MAX_FLOOR_NUMBER;
@@ -89,7 +94,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNotOutOfRangeMin () {
+    public void testCustomerToFloorNumberIsNotOutOfRangeMin () throws Exception {
         Customer customer9 = new Customer();
 
         int min = Building.MIN_FLOOR_NUMBER;
@@ -99,7 +104,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerId () {
+    public void testCustomerId () throws Exception {
         Customer customer10 = new Customer();
 
         int expectedId = Customer.count;
@@ -113,12 +118,8 @@ public class CustomerTest {
         // TODO Once Building class has been equipped with user input,
         // expectedCount needs to be equal to the number of customers the user
         // decided to have in the elevator simulation
-        int expectedCount = 10;
+        int expectedCount = 11;
         int actualCount = Customer.count;
-        
-        for (Integer floor : Elevator.requestedFloorToStop) {
-            System.out.println("Floor to stop " + floor);
-        }
 
         assertEquals(expectedCount, actualCount);
     }

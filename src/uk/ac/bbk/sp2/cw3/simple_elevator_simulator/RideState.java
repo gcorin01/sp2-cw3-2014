@@ -9,10 +9,12 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public abstract class RideState {
 
-    protected Customer customer = null;
-    protected String command = null; 
+    protected Customer customer        = null;
+    protected String   command         = null;
+    protected String      flagDescription = null;
 
-    public abstract void pressElevatorButton (Customer customer, String command);
+    public abstract void pressElevatorButton (Customer customer, String command)
+            throws Exception;
 
-    public abstract RideState move ();
+    public abstract RideState move (Customer customer) throws Exception;
 }

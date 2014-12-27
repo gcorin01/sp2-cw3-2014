@@ -11,10 +11,11 @@ import java.util.List;
  *
  */
 public class Elevator {
-    //public static int                currentFloor;
+    public static int                currentFloor         = 0;
+    public static int                floorVisited         = 0;
     public static ArrayList<Integer> requestedFloorToStop = new ArrayList<Integer>();
     public static List<Customer>     registerList         = new ArrayList<Customer>();
-    public static int                floorVisited         = 0;
+    public static List<Customer>     customerJoins        = new ArrayList<Customer>();
 
     public Elevator() {
 

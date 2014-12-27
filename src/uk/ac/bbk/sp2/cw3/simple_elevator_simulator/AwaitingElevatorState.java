@@ -8,36 +8,43 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  *
  */
 public class AwaitingElevatorState extends RideState {
-    public String flag = null;
 
     public AwaitingElevatorState() {
-        this.flag = "Awaiting Elevator";
+        this.flagDescription = "Awaiting Elevator";
     }
 
     @Override
-    public void pressElevatorButton (Customer customer, String command) {
-        callElevator(customer, command);
-    }
+    public void pressElevatorButton (Customer customer, String command)
+            throws Exception {
+        try {
+            // Command is to call the Elevator at customer.atFloorNumber
+            int n = Integer.parseInt(command);
 
-    private void callElevator (Customer customer, String command) {
-        // Command is the customer.atFloorNumber
-        int n = Integer.parseInt(command);
-        
-        Elevator.requestedFloorToStop.add(n);
+            Elevator.requestedFloorToStop.add(n);
 
-        System.out.println("Customer #" + customer.getId()
-                + " is waiting for the elevator at floor number " + n);
+            System.out.println("Customer #" + customer.getId()
+                    + " is waiting for the elevator at floor number " + n);
+        } catch (Exception e) {
+            System.err.println("A customer #" + customer.getId()
+                    + " could not call the elevator.");
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public RideState move () {
-        // TODO trigger customerJoins in Elevator class
-        return setStateToOnboardElevator();
-    }
+    public RideState move (Customer customer) throws Exception {
+        // Customer enters the Elevator
+        try {
+            Elevator.customerJoins.add(customer);
+            System.out.println("Customer #" + customer.getId()
+                    + " has boarded the elevator at floor number");
 
-    public RideState setStateToOnboardElevator () {
-        System.out.println("A customer has borded the elevator");
+            return new OnboardElevatorState();
+        } catch (Exception e) {
+            System.err.println("Customer cannot enter the elevator.");
+            e.printStackTrace();
 
-        return new OnboardElevatorState();
+            return customer.getRideState();
+        }
     }
 }
