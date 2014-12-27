@@ -5,10 +5,11 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 /**
- * x`
  * 
  * @author gcorin01
  *
@@ -18,124 +19,107 @@ public class CustomerTest {
     @Test
     public void testCustomerClassExistance () {
         @SuppressWarnings("unused")
-        Customer customer = new Customer();
-    }
-
-    @Test
-    public void testCustomerId () {
-        @SuppressWarnings("unused")
-        Customer customer = new Customer();
-
-        int expectedId = 1;
-        int actualId = customer.getId();
-
-        assertEquals(expectedId, actualId);
-    }
-
-    @Test
-    public void testCustomerCount () {
-        @SuppressWarnings("unused")
         Customer customer1 = new Customer();
-        @SuppressWarnings("unused")
-        Customer customer2 = new Customer();
-        @SuppressWarnings("unused")
-        Customer customer3 = new Customer();
-
-        int expectedCount = 3;
-        int actualCount = Customer.count;
-
-        assertEquals(expectedCount, actualCount);
+        
+        assertTrue(customer1 != null);
     }
 
     @Test
     public void testCustomerAtFloorNumberExistance () {
-        @SuppressWarnings("unused")
-        Customer customer = new Customer();
+        Customer customer2 = new Customer();
 
-        String s = customer.getAtFloorNumber();
-        System.out.println("At floor number: " + s);
+        String s = customer2.getAtFloorNumber();
+        
+        assertTrue(s != null);
+    }
+
+    @Test
+    public void testCustomerAtFloorNumberIsNot13 () {
+        Customer customer3 = new Customer();
+
+        String s = customer3.getAtFloorNumber();
+        assertFalse(s.equals(Integer.toString(Building.FLOOR_TO_IGNORE)));
+    }
+
+    @Test
+    public void testCustomerAtFloorNumberIsNotOutOfRangeMax () {
+        Customer customer4 = new Customer();
+
+        int max = Building.MAX_FLOOR_NUMBER;
+        int toFloorN = Integer.parseInt(customer4.getAtFloorNumber());
+
+        assertFalse(toFloorN > max);
+    }
+
+    @Test
+    public void testCustomerAtFloorNumberIsNotOutOfRangeMin () {
+        Customer customer5 = new Customer();
+
+        int min = Building.MIN_FLOOR_NUMBER;
+        int toFloorN = Integer.parseInt(customer5.getAtFloorNumber());
+
+        assertFalse(toFloorN < min);
     }
 
     @Test
     public void testCustomerToFloorNumberExistance () {
-        @SuppressWarnings("unused")
-        Customer customer = new Customer();
+        Customer customer6 = new Customer();
 
-        String s = customer.getToFloorNumber();
-        System.out.println("To floor number: " + s);
+        String s = customer6.getToFloorNumber();
+
+        assertFalse(s == null);
     }
 
     @Test
     public void testCustomerToFloorNumberIsNot13 () {
-        @SuppressWarnings("unused")
-        Customer customer = new Customer();
+        Customer customer7 = new Customer();
 
-        String s = customer.getToFloorNumber();
-        assertFalse(s.equals("13"));
+        String s = customer7.getToFloorNumber();
+        assertFalse(s.equals(Integer.toString(Building.FLOOR_TO_IGNORE)));
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNotOutOfRange () {
-        @SuppressWarnings("unused")
-        Customer customer = new Customer();
+    public void testCustomerToFloorNumberIsNotOutOfRangeMax () {
+        Customer customer8 = new Customer();
 
-        String s = customer.getToFloorNumber();
-        assertFalse(s.equals("13"));
+        int max = Building.MAX_FLOOR_NUMBER;
+        int toFloorN = Integer.parseInt(customer8.getToFloorNumber());
+
+        assertFalse(toFloorN > max);
     }
 
     @Test
-    public void testCustomerIdAttribureExistance () {
-        int id = 1;
+    public void testCustomerToFloorNumberIsNotOutOfRangeMin () {
+        Customer customer9 = new Customer();
 
-        @SuppressWarnings("unused")
-        Customer customer = new Customer(id);
+        int min = Building.MIN_FLOOR_NUMBER;
+        int toFloorN = Integer.parseInt(customer9.getToFloorNumber());
+
+        assertFalse(toFloorN < min);
     }
 
     @Test
-    public void testInElevatorMethodExistance () {
-        int id = 1;
-        int desiredFloor = 5;
+    public void testCustomerId () {
+        Customer customer10 = new Customer();
 
-        Customer customer = new Customer(id);
+        int expectedId = Customer.count;
+        int actualId = customer10.getId();
 
-        @SuppressWarnings("unused")
-        boolean onboard = customer.inElevator();
+        assertEquals(expectedId, actualId);
     }
 
-    @Test
-    public void testFinishedMethodExistance () {
-        int id = 1;
-        int desiredFloor = 5;
+    @AfterClass
+    public static void testCustomerCount () {
+        // TODO Once Building class has been equipped with user input,
+        // expectedCount needs to be equal to the number of customers the user
+        // decided to have in the elevator simulation
+        int expectedCount = 10;
+        int actualCount = Customer.count;
+        
+        for (Integer floor : Elevator.requestedFloorToStop) {
+            System.out.println("Floor to stop " + floor);
+        }
 
-        Customer customer = new Customer(id);
-
-        @SuppressWarnings("unused")
-        boolean finished = customer.arrived();
+        assertEquals(expectedCount, actualCount);
     }
-
-    @Test
-    public void testDesiredFloorAttributeExistance () {
-        int id = 1;
-
-        @SuppressWarnings("unused")
-        Customer customer = new Customer(id);
-
-        System.out.println("The random customer atFloorNumber is: "
-                + customer.atFloorNumber);
-
-    }
-
-    @Test
-    public void testGetDestinationFloorMethod () {
-        fail("Not yet implemented");
-    } // TODO Add number floors boundary in Customer Class as CONSTANTS derived
-      // by the user input
-
-    @Test
-    public void testGetCurrentFloorMethod () {
-        fail("Not yet implemented");
-    } // TODO Number set by random number generator / possibly this should be an
-      // Interface so that it can be implemented in various ways such as letting
-      // the user decide the destination floor rather than using random numbers
-
 }
