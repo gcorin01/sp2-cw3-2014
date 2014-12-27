@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * x`
+ * 
  * @author gcorin01
  *
  */
@@ -16,25 +18,69 @@ public class CustomerTest {
     @Test
     public void testCustomerClassExistance () {
         @SuppressWarnings("unused")
-        Customer customer = new Customer(5);
+        Customer customer = new Customer();
     }
 
     @Test
-    public void testGetFloorNumberMethodExistance () {
+    public void testCustomerId () {
         @SuppressWarnings("unused")
-        Customer customer = new Customer(0);
+        Customer customer = new Customer();
 
-        @SuppressWarnings("unused")
-        int currentFloor = customer.getFloorNumber();
+        int expectedId = 1;
+        int actualId = customer.getId();
+
+        assertEquals(expectedId, actualId);
     }
 
     @Test
-    public void testGetDestinationFloorMethodExistance () {
+    public void testCustomerCount () {
         @SuppressWarnings("unused")
-        Customer customer = new Customer(5);
+        Customer customer1 = new Customer();
+        @SuppressWarnings("unused")
+        Customer customer2 = new Customer();
+        @SuppressWarnings("unused")
+        Customer customer3 = new Customer();
 
+        int expectedCount = 3;
+        int actualCount = Customer.count;
+
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    public void testCustomerAtFloorNumberExistance () {
         @SuppressWarnings("unused")
-        int currentFloor = Customer.getDestinationFloor();
+        Customer customer = new Customer();
+
+        String s = customer.getAtFloorNumber();
+        System.out.println("At floor number: " + s);
+    }
+
+    @Test
+    public void testCustomerToFloorNumberExistance () {
+        @SuppressWarnings("unused")
+        Customer customer = new Customer();
+
+        String s = customer.getToFloorNumber();
+        System.out.println("To floor number: " + s);
+    }
+
+    @Test
+    public void testCustomerToFloorNumberIsNot13 () {
+        @SuppressWarnings("unused")
+        Customer customer = new Customer();
+
+        String s = customer.getToFloorNumber();
+        assertFalse(s.equals("13"));
+    }
+
+    @Test
+    public void testCustomerToFloorNumberIsNotOutOfRange () {
+        @SuppressWarnings("unused")
+        Customer customer = new Customer();
+
+        String s = customer.getToFloorNumber();
+        assertFalse(s.equals("13"));
     }
 
     @Test

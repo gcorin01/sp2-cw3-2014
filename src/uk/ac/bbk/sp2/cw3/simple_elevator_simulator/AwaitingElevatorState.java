@@ -19,7 +19,8 @@ public class AwaitingElevatorState extends RideState {
     }
 
     private void callElevator (String atFloorNumber) {
-        Elevator.requestedFloorToStop.add(Integer.parseInt(atFloorNumber));
+        int n = Integer.parseInt(atFloorNumber);
+        Elevator.requestedFloorToStop.add(n);
 
         System.out
                 .println("A customer is waiting for the elevator at floor number "

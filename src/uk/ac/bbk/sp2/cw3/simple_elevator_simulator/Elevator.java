@@ -11,15 +11,19 @@ import java.util.List;
  *
  */
 public class Elevator {
+    //public static int                currentFloor;
+    public static ArrayList<Integer> requestedFloorToStop = new ArrayList<Integer>();
+    public static List<Customer>     registerList         = new ArrayList<Customer>();
+    public static int                floorVisited         = 0;
 
-    public static int                currentFloor;
-    public static ArrayList<Integer> requestedFloorToStop;
-    public static List<Customer>     registerList;
+    public Elevator() {
 
-    // List of Employees with given IDs to be used when letting Customers on/off
+    }
+
+    // List of Customers with given IDs to be used when letting Customers on/off
     // the Elevator at a given floor
     // Integer[] ids = {1, 2, 4, 8};
-    // List<Employee> matchingEmployees =
+    // List<Customer> matchingCustomer =
     // Stream.of(ids).map(EmployeeUtils::findById).collect(toList());
     // Intermediate Operations filter excludes all elements that don’t match
     // a Predicate.
