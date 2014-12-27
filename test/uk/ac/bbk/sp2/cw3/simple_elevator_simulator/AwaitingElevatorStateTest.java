@@ -10,7 +10,7 @@ import org.junit.Test;
  * @author Gabriel
  *
  */
-public class AwaitingElevatorStatusTest {
+public class AwaitingElevatorStateTest {
 
     RideState rideStatus;
 

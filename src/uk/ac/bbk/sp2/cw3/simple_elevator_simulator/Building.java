@@ -25,9 +25,6 @@ public class Building {
     }
 
     static String setFloorNumber (Customer customer) {
-        // TODO Add a functional interface (or SAM interface) to change this
-        // method so that the implementation of the random number is moved
-        // outside of this class
         int max = MAX_FLOOR_NUMBER;
         int min = MIN_FLOOR_NUMBER;
 

@@ -11,7 +11,7 @@ public abstract class RideState {
 
     protected Customer customer        = null;
     protected String   command         = null;
-    protected String      flagDescription = null;
+    protected String   flagDescription = null;
 
     public abstract void pressElevatorButton (Customer customer, String command)
             throws Exception;
