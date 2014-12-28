@@ -1,11 +1,21 @@
-/**
- * 
- */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
+ * Customer is the context/driver class of a state pattern to simulate the basic
+ * interactions (press a button, move in or out) a person has when using an
+ * elevator. The other classes forming the state design pattern are as follows:
+ * <ul>
+ * <li>Abstract state class: <code>RideState</code>;
+ * <li>Concrete state class: <code>AwaitingElevatorState</code>;
+ * <li>Concrete state class: <code>OnboardElevatorState</code>;
+ * <li>Concrete state class: <code>ArrivedState</code>.
+ * </ul>
+ * <p>
+ * This is Coursework Three to be submitted for the purposes of Birkbeck,
+ * University of London's module Software and Programming II (2014_15).
+ * 
  * @author gcorin01
- *
+ * @version %i%, 28 December 2014
  */
 public class Customer {
     static int        count            = 0;

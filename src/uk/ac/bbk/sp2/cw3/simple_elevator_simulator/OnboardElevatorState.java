@@ -1,11 +1,27 @@
-/**
- * 
- */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
+ * OnboardElevatorState is the second state amongst the various states in which
+ * a customer can be within this simulated environment. This is a concrete state
+ * class. When a customer <code>pressElevatorButton</code> while being in this
+ * state, the desired floor destination number ( <code>toFloorNumber</code>) is
+ * selected in order for the elevator to stop and allow the customer to get-out.
+ * When a customer <code>move()</code> while being in this state, the respective
+ * action to be simulated is to exit the elevator.
+ * <p>
+ * The other classes forming the state design pattern are as follows:
+ * <ul>
+ * <li>Context/driver state class: <code>Customer</code>;
+ * <li>Abstract state class: <code>RideState</code>;
+ * <li>Concrete state class: <code>AwaitingElevator</code>;
+ * <li>Concrete state class: <code>ArrivedState</code>.
+ * </ul>
+ * <p>
+ * This is Coursework Three to be submitted for the purposes of Birkbeck,
+ * University of London's module Software and Programming II (2014_15).
+ * 
  * @author gcorin01
- *
+ * @version %i%, 28 December 2014
  */
 public class OnboardElevatorState extends RideState {
 

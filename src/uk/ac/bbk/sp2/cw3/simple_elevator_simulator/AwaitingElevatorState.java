@@ -1,11 +1,27 @@
-/**
- * 
- */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
+ * AwaitingElevator is the fist amongst the various states in which a customer
+ * can be within this simulated environment. This is a concrete state class.
+ * When a customer <code>pressElevatorButton</code> while being in this state,
+ * the elevator is called to stop at a specific floor (
+ * <code>atFloorNumber</code>) enabling the customer to get-in. When a customer
+ * <code>move()</code> while being in this state, the respective action to be
+ * simulated is to enter the elevator.
+ * <p>
+ * The other classes forming the state design pattern are as follows:
+ * <ul>
+ * <li>Context/driver state class: <code>Customer</code>;
+ * <li>Abstract state class: <code>RideState</code>;
+ * <li>Concrete state class: <code>OnboardElevatorState</code>;
+ * <li>Concrete state class: <code>ArrivedState</code>.
+ * </ul>
+ * <p>
+ * This is Coursework Three to be submitted for the purposes of Birkbeck,
+ * University of London's module Software and Programming II (2014_15).
+ * 
  * @author gcorin01
- *
+ * @version %i%, 28 December 2014
  */
 public class AwaitingElevatorState extends RideState {
 
