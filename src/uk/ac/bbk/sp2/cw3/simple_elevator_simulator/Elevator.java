@@ -17,6 +17,9 @@ public class Elevator {
     private int                  floorVisited  = 0;
     public static List<Customer> registerList  = new ArrayList<Customer>();
 
+    /** 
+     * Class constructor.
+     */
     public Elevator() {
 
     }

@@ -2,12 +2,13 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 /**
  * AwaitingElevator is the fist amongst the various states in which a customer
- * can be within this simulated environment. This is a concrete state class.
- * When a customer <code>pressElevatorButton</code> while being in this state,
- * the elevator is called to stop at a specific floor (
- * <code>atFloorNumber</code>) enabling the customer to get-in. When a customer
- * <code>move()</code> while being in this state, the respective action to be
- * simulated is to enter the elevator.
+ * can be within this simulated environment. This is a concrete state class
+ * which extends the RideState abstract class. When a customer
+ * <code>pressElevatorButton</code> while being in this state, the elevator is
+ * called to stop at a specific floor ( <code>atFloorNumber</code>) enabling the
+ * customer to get-in. When a customer <code>move()</code> while being in this
+ * state, the respective action to be simulated is to enter the elevator and the
+ * customer state/flag is changed from "Awaiting Elevator" to "In Elevator".
  * <p>
  * The other classes forming the state design pattern are as follows:
  * <ul>
@@ -25,14 +26,25 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public class AwaitingElevatorState extends RideState {
 
+    /**
+     * Class constructor where the flag/state description is generated
+     */
     public AwaitingElevatorState() {
         setFlagDescription("Awaiting Elevator");
     }
 
+    /**
+     * Calls the Elevator at a randomly generated floor number. Implements the
+     * abstract method
+     * 
+     * @param customer
+     * @throws Exception
+     *             if for any reason the <code>customer.atFloorNumber</code>
+     *             cannot be set or the customer is null
+     */
     @Override
     public void pressElevatorButton (Customer customer) throws Exception {
         try {
-            // Customer calls the Elevator at customer.atFloorNumber
             customer.setAtFloorNumber();
 
             System.out.println("Customer #" + customer.getId()
@@ -45,16 +57,30 @@ public class AwaitingElevatorState extends RideState {
         }
     }
 
+    /**
+     * Moves the customer inside the Elevator and changes the customer's
+     * RideState/flag to "In Elevator"
+     * 
+     * @param customer
+     * @return the customer "In Elevator" <code>currentRideState</code> if moved
+     *         successfully or the unchanged <code>currentRideState</code> which
+     *         in this case would be null
+     * @throws Exception
+     *             if for any reason the customer is unable to enter the
+     *             elevator. For example, in future developments, it might be
+     *             that the max number of customers in the elevator is checked
+     *             and the customer cannot board the elevator when it's already
+     *             full
+     */
     @Override
     public RideState move (Customer customer) throws Exception {
-        // Customer enters the Elevator and the RideState/flag changes to
-        // "In Elevator"
         try {
             Elevator.registerList.add(customer);
             System.out.println("Customer #" + customer.getId()
                     + " has boarded the elevator at floor number "
                     + customer.getAtFloorNumber());
 
+            // The RideStete/flag is set to "In Elevator"
             return new OnboardElevatorState();
         } catch (Exception e) {
             System.err.println("Customer #" + customer.getId()

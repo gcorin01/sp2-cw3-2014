@@ -6,9 +6,12 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  * the state design pattern are as follows:
  * <ul>
  * <li>Context/driver state class: <code>Customer</code>;
- * <li>Concrete state class: <code>AwaitingElevatorState</code>;
- * <li>Concrete state class: <code>OnboardElevatorState</code>;
- * <li>Concrete state class: <code>ArrivedState</code>.
+ * <li>Concrete state class: <code>AwaitingElevatorState</code> which extends
+ * this (RideState) class;
+ * <li>Concrete state class: <code>OnboardElevatorState</code> which extends
+ * this (RideState) class;
+ * <li>Concrete state class: <code>ArrivedState</code> which extends this
+ * (RideState) class.
  * </ul>
  * <p>
  * This is Coursework Three to be submitted for the purposes of Birkbeck,
@@ -30,14 +33,29 @@ public abstract class RideState {
 
     /**
      * @param flagDescription
-     *            the flagDescription to set
+     *            the customer state or flagDescription to set in each subclass
+     *            of this abstract class
      */
     protected void setFlagDescription (String flagDescription) {
         this.flagDescription = flagDescription;
     }
 
+    /**
+     * Abstract method implemented in the relevant subclasses of this class
+     * 
+     * @param customer
+     * @throws Exception
+     */
     public abstract void pressElevatorButton (Customer customer)
             throws Exception;
 
+    /**
+     * Abstract method implemented in the relevant subclasses of this class
+     * 
+     * @param customer
+     * @return the customer RideState at any given time which is implemented in
+     *         this abstract class' subclass
+     * @throws Exception
+     */
     public abstract RideState move (Customer customer) throws Exception;
 }
