@@ -14,36 +14,39 @@ public class AwaitingElevatorState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton (Customer customer, String command)
-            throws Exception {
+    public void pressElevatorButton (Customer customer) throws Exception {
         try {
-            // Command is to call the Elevator at customer.atFloorNumber
-            int n = Integer.parseInt(command);
-
-            Elevator.requestedFloorToStop.add(n);
+            // Customer calls the Elevator at customer.atFloorNumber
+            customer.setAtFloorNumber();
 
             System.out.println("Customer #" + customer.getId()
-                    + " is waiting for the elevator at floor number " + n);
+                    + " is waiting for the elevator at floor number "
+                    + customer.getAtFloorNumber());
         } catch (Exception e) {
-            System.err.println("A customer #" + customer.getId()
-                    + " could not call the elevator.");
-            e.printStackTrace();
+            System.err.println("Customer #" + customer.getId()
+                    + " could not call the elevator at floor number "
+                    + customer.getAtFloorNumber());
         }
     }
 
     @Override
     public RideState move (Customer customer) throws Exception {
-        // Customer enters the Elevator
+        // Customer enters the Elevator and the RideState/flag changes to
+        // "In Elevator"
         try {
-            Elevator.customerJoins.add(customer);
+            Elevator.registerList.add(customer);
             System.out.println("Customer #" + customer.getId()
-                    + " has boarded the elevator at floor number");
+                    + " has boarded the elevator at floor number "
+                    + customer.getAtFloorNumber());
 
             return new OnboardElevatorState();
         } catch (Exception e) {
-            System.err.println("Customer cannot enter the elevator.");
-            e.printStackTrace();
+            System.err.println("Customer #" + customer.getId()
+                    + " was unable board the elevator at floor number "
+                    + customer.getAtFloorNumber());
 
+            // If for any reason the customer is unable to enter the elevator,
+            // the RideState/flag will be null
             return customer.getRideState();
         }
     }

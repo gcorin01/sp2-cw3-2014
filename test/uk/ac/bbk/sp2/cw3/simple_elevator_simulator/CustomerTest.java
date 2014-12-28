@@ -49,7 +49,7 @@ public class CustomerTest {
     public void testCustomerAtFloorNumberIsNotOutOfRangeMax () throws Exception {
         Customer customer4 = new Customer();
 
-        int max = Building.MAX_FLOOR_NUMBER;
+        int max = Building.HIGHEST_FLOOR_NUMBER;
         int toFloorN = Integer.parseInt(customer4.getAtFloorNumber());
 
         assertFalse(toFloorN > max);
@@ -59,7 +59,7 @@ public class CustomerTest {
     public void testCustomerAtFloorNumberIsNotOutOfRangeMin () throws Exception {
         Customer customer5 = new Customer();
 
-        int min = Building.MIN_FLOOR_NUMBER;
+        int min = Building.lOWEST_FLOOR_NUMBER;
         int toFloorN = Integer.parseInt(customer5.getAtFloorNumber());
 
         assertFalse(toFloorN < min);
@@ -86,7 +86,7 @@ public class CustomerTest {
     public void testCustomerToFloorNumberIsNotOutOfRangeMax () throws Exception {
         Customer customer8 = new Customer();
 
-        int max = Building.MAX_FLOOR_NUMBER;
+        int max = Building.HIGHEST_FLOOR_NUMBER;
         int toFloorN = Integer.parseInt(customer8.getToFloorNumber());
 
         assertFalse(toFloorN > max);
@@ -96,7 +96,7 @@ public class CustomerTest {
     public void testCustomerToFloorNumberIsNotOutOfRangeMin () throws Exception {
         Customer customer9 = new Customer();
 
-        int min = Building.MIN_FLOOR_NUMBER;
+        int min = Building.lOWEST_FLOOR_NUMBER;
         int toFloorN = Integer.parseInt(customer9.getToFloorNumber());
 
         assertFalse(toFloorN < min);

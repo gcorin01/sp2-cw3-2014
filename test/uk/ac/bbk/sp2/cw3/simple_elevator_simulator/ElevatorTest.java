@@ -4,11 +4,10 @@
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 /**
- * @author Gabriel
+ * @author gcorin01
  *
  */
 public class ElevatorTest {

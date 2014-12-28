@@ -14,41 +14,38 @@ public class OnboardElevatorState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton (Customer customer, String command)
-            throws Exception {
+    public void pressElevatorButton (Customer customer) throws Exception {
         try {
-            // Command is to select the desired floor which is
+            // Customer selects the desired destination floor which is
             // customer.toFloorNumber
-            int n = Integer.parseInt(command);
+            customer.setToFloorNumber();
 
-            Elevator.requestedFloorToStop.add(n);
-
-            System.out.println("A customer #" + customer.getId()
-                    + " requested to be taken to floor number " + n);
+            System.out.println("Customer #" + customer.getId()
+                    + " requested to be taken to floor number "
+                    + customer.getToFloorNumber());
         } catch (Exception e) {
-            System.err.println("A customer #" + customer.getId()
+            System.err.println("Customer #" + customer.getId()
                     + " could not select the desired floor.");
-            e.printStackTrace();
         }
     }
 
     @Override
     public RideState move (Customer customer) throws Exception {
         try {
-            // Customer exit the Elevator
-            // TODO Remove customer from Elevator customerLeaves(customer) >
-            // registerList
-
-            // Customer has arrived to the desired floor
-            System.out.println("A customer #" + customer.getId()
-                    + " has exited the elevator");
+            // Customer has arrived to the desired floor and exits the Elevator
+            // and the RideState/flag is changed to "Arrived"
+            System.out.println("Customer #" + customer.getId()
+                    + " has exited at floor number "
+                    + customer.getToFloorNumber());
 
             return new ArrivedState();
         } catch (Exception e) {
             System.err.println("Customer #" + customer.getId()
-                    + " cannot be moved.");
-            e.printStackTrace();
+                    + " was not able to exit at floor number "
+                    + customer.getToFloorNumber());
 
+            // If for any reason the customer is unable to leave the elevator,
+            // the RideState/flag remains as "In Elevator"
             return customer.getRideState();
         }
     }

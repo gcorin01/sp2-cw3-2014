@@ -14,17 +14,18 @@ public class ArrivedState extends RideState {
     }
 
     @Override
-    public void pressElevatorButton (Customer customer, String command)
+    public void pressElevatorButton (Customer customer)
             throws Exception {
         // No need to implement
 
         throw new Exception(
-                "Customer has arrived and is not allowed to select another button of the elevator.");
+                "Customer has arrived and is not allowed to"
+                + " select another button of the elevator.");
     }
 
     @Override
     public RideState move (Customer customer) throws Exception {
-        // TODO No need to implement
+        // No need to implement
 
         throw new Exception("Customer has altrady exited the elevator.");
     }

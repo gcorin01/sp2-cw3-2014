@@ -24,7 +24,7 @@ public class RideStateTest {
     }
 
     @Test
-    public void testRideStatusMethodMove () throws Exception {
+    public void testRideStateMethodMove () throws Exception {
         Customer customer = new Customer();
         rideState.move(customer);
 
@@ -32,18 +32,10 @@ public class RideStateTest {
     }
 
     @Test
-    public void testRideStatusMethodSelectElevatorCommandCustNotNull() throws Exception {
+    public void testRideStateMethodPressElevatorButtonCustNotNull ()
+            throws Exception {
         Customer customer = new Customer();
-        String command = "" + 1;
-        rideState.pressElevatorButton(customer, command);
+        rideState.pressElevatorButton(customer);
         assertTrue(customer != null);
-    }
-
-    @Test
-    public void testRideStatusMethodSelectElevatorCommandCommNotNull() throws Exception {
-        Customer customer = new Customer();
-        String command = "" + 1;
-        rideState.pressElevatorButton(customer, command);
-        assertTrue(command != null);
     }
 }

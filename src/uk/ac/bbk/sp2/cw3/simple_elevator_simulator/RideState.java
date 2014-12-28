@@ -13,7 +13,7 @@ public abstract class RideState {
     protected String   command         = null;
     protected String   flagDescription = null;
 
-    public abstract void pressElevatorButton (Customer customer, String command)
+    public abstract void pressElevatorButton (Customer customer)
             throws Exception;
 
     public abstract RideState move (Customer customer) throws Exception;

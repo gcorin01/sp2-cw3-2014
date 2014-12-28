@@ -17,20 +17,10 @@ public class Customer {
     public Customer() throws Exception {
         count++;
         setId(count);
-
-        // In a real world scenario, it would be the actual button pressed by
-        // the Customer which determines at which floor the elevator has been
-        // called from and the desired floor a customer wants to go
-        setAtFloorNumber();
-        setToFloorNumber();
-
-        initialiseCustomer(this.atFloorNumber);
-    }
-
-    private void initialiseCustomer (String atFloorNumber) throws Exception {
-        setRideState(new AwaitingElevatorState());
-
-        this.currentRideState.pressElevatorButton(this, atFloorNumber);
+        setRideState(new AwaitingElevatorState()); // If successful, The
+                                                   // RideStete/flag is set to
+                                                   // "Awaiting Elevator"
+        this.currentRideState.pressElevatorButton(this);
     }
 
     /**
@@ -70,15 +60,8 @@ public class Customer {
         return atFloorNumber;
     }
 
-    /**
-     * @param atFloorNumber
-     *            the atFloorNumber to set
-     * @return
-     */
-    private String setAtFloorNumber () {
-        this.atFloorNumber = Building.getFloorNumber(this);
-
-        return this.atFloorNumber;
+    public void setAtFloorNumber () {
+        this.atFloorNumber = Elevator.getFloorNumber(this);
     }
 
     /**
@@ -88,38 +71,26 @@ public class Customer {
         return toFloorNumber;
     }
 
-    /**
-     * @param toFloorNumber
-     *            the toFloorNumber to set
-     * @return
-     */
-    private String setToFloorNumber () {
-        this.toFloorNumber = Building.getFloorNumber(this);
-
-        return this.toFloorNumber;
+    public void setToFloorNumber () {
+        this.toFloorNumber = Elevator.getFloorNumber(this);
     }
 
     public void move () throws Exception {
-        // Currently Customer can either enters or exit the elevator
-        
+        // Currently Customer can either enter or exit the elevator
         try {
             this.currentRideState = currentRideState.move(this);
         } catch (Exception e) {
             System.err.println("Customer cannot be moved.");
-            e.printStackTrace();
         }
     }
 
-    public void pressElevatorButton (String command) throws Exception {
-        // In a real case scenario, it would be the actual button pressed by the
-        // Customer which would determine either the floor number or any other
-        // function available to be selected within the elevator
-
+    public void pressElevatorButton () throws Exception {
+        // Currently Customer can either call the elevator or select a
+        // destination floor
         try {
-            this.currentRideState.pressElevatorButton(this, command);
+            this.currentRideState.pressElevatorButton(this);
         } catch (Exception e) {
             System.err.println("Command not recognised.");
-            e.printStackTrace();
         }
     }
 }
