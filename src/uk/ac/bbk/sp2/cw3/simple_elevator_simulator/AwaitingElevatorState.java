@@ -10,7 +10,7 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 public class AwaitingElevatorState extends RideState {
 
     public AwaitingElevatorState() {
-        this.flagDescription = "Awaiting Elevator";
+        setFlagDescription("Awaiting Elevator");
     }
 
     @Override

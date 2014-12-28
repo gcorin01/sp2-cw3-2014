@@ -10,7 +10,7 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 public class ArrivedState extends RideState {
 
     public ArrivedState() {
-        this.flagDescription = "Arrived";
+        setFlagDescription("Arrived");
     }
 
     @Override
@@ -22,7 +22,7 @@ public class ArrivedState extends RideState {
                 "Customer has arrived and is not allowed to"
                 + " select another button of the elevator.");
     }
-
+    
     @Override
     public RideState move (Customer customer) throws Exception {
         // No need to implement

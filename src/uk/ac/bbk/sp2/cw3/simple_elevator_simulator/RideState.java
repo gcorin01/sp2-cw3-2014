@@ -9,9 +9,21 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
  */
 public abstract class RideState {
 
-    protected Customer customer        = null;
-    protected String   command         = null;
-    protected String   flagDescription = null;
+    private String   flagDescription = null;
+
+    /**
+     * @return the flagDescription
+     */
+    public String getFlagDescription () {
+        return flagDescription;
+    }
+
+    /**
+     * @param flagDescription the flagDescription to set
+     */
+    protected void setFlagDescription (String flagDescription) {
+        this.flagDescription = flagDescription;
+    }
 
     public abstract void pressElevatorButton (Customer customer)
             throws Exception;

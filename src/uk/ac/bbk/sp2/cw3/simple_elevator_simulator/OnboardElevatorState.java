@@ -10,7 +10,7 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 public class OnboardElevatorState extends RideState {
 
     public OnboardElevatorState() {
-        this.flagDescription = "In Elevator";
+        setFlagDescription("In Elevator");
     }
 
     @Override

@@ -4,6 +4,7 @@
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
+
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -22,10 +23,47 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerStateFlagName () throws Exception {
+    public void testCustomerStateFlagNameAwaitng () throws Exception {
         Customer customer1 = new Customer();
 
-        assertTrue(customer1.getRideState().flagDescription == "Awaiting Elevator");
+        assertTrue(customer1.getRideState().getFlagDescription () == "Awaiting Elevator");
+    }
+    
+    @Test
+    public void testCustomerStateFlagNameInElevator () throws Exception {
+        Customer customer1 = new Customer();
+        customer1.move();
+        customer1.getRideState().pressElevatorButton(customer1);
+
+        assertTrue(customer1.getRideState().getFlagDescription () == "In Elevator");
+    }
+    
+    @Test
+    public void testCustomerStateFlagNameArrived () throws Exception {
+        Customer customer1 = new Customer();
+        customer1.move();
+        customer1.getRideState().pressElevatorButton(customer1);
+        customer1.move();
+       
+        assertTrue(customer1.getRideState().getFlagDescription () == "Arrived");
+    }
+    
+    @Test(expected = Exception.class)
+    public void testCustomerStateFlagNameArrivedPressElevatorButtonExceptions () throws Exception {
+        Customer customer1 = new Customer();
+        customer1.move();
+        customer1.getRideState().pressElevatorButton(customer1);
+        customer1.move();
+        customer1.getRideState().pressElevatorButton(customer1);        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testCustomerStateFlagNameArrivedMoveExceptions () throws Exception {
+        Customer customer1 = new Customer();
+        customer1.move();
+        customer1.getRideState().pressElevatorButton(customer1);
+        customer1.move();
+        customer1.getRideState().move(customer1);        
     }
 
     @Test
@@ -46,7 +84,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerAtFloorNumberIsNotOutOfRangeMax () throws Exception {
+    public void testCustomerAtFloorNumberIsNotOutOfRangeHighest () throws Exception {
         Customer customer4 = new Customer();
 
         int max = Building.HIGHEST_FLOOR_NUMBER;
@@ -56,7 +94,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerAtFloorNumberIsNotOutOfRangeMin () throws Exception {
+    public void testCustomerAtFloorNumberIsNotOutOfRangeLowest () throws Exception {
         Customer customer5 = new Customer();
 
         int min = Building.lOWEST_FLOOR_NUMBER;
@@ -68,7 +106,9 @@ public class CustomerTest {
     @Test
     public void testCustomerToFloorNumberExistance () throws Exception {
         Customer customer6 = new Customer();
-
+        customer6.move();
+        customer6.getRideState().pressElevatorButton(customer6);
+        
         String s = customer6.getToFloorNumber();
 
         assertFalse(s == null);
@@ -77,14 +117,18 @@ public class CustomerTest {
     @Test
     public void testCustomerToFloorNumberIsNot13 () throws Exception {
         Customer customer7 = new Customer();
+        customer7.move();
+        customer7.getRideState().pressElevatorButton(customer7);
 
         String s = customer7.getToFloorNumber();
         assertFalse(s.equals(Integer.toString(Building.FLOOR_TO_IGNORE)));
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNotOutOfRangeMax () throws Exception {
+    public void testCustomerToFloorNumberIsNotOutOfRangeHighest () throws Exception {
         Customer customer8 = new Customer();
+        customer8.move();
+        customer8.getRideState().pressElevatorButton(customer8);
 
         int max = Building.HIGHEST_FLOOR_NUMBER;
         int toFloorN = Integer.parseInt(customer8.getToFloorNumber());
@@ -93,10 +137,14 @@ public class CustomerTest {
     }
 
     @Test
-    public void testCustomerToFloorNumberIsNotOutOfRangeMin () throws Exception {
+    public void testCustomerToFloorNumberIsNotOutOfRangeLowest () throws Exception {
         Customer customer9 = new Customer();
 
         int min = Building.lOWEST_FLOOR_NUMBER;
+
+        customer9.move();
+        customer9.getRideState().pressElevatorButton(customer9);
+
         int toFloorN = Integer.parseInt(customer9.getToFloorNumber());
 
         assertFalse(toFloorN < min);
@@ -117,7 +165,7 @@ public class CustomerTest {
         // TODO Once Building class has been equipped with user input,
         // expectedCount needs to be equal to the number of customers the user
         // decided to have in the elevator simulation
-        int expectedCount = 11;
+        int expectedCount = 15;
         int actualCount = Customer.count;
 
         assertEquals(expectedCount, actualCount);
