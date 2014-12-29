@@ -10,10 +10,10 @@ import java.util.*;
  *
  */
 public class Elevator {
-    private int                  currentFloor = 0;
-    private int                  floorVisited = 0;
-    public static List<Customer> registerList = new ArrayList<Customer>();
-    private TreeSet<Integer>     floorsToStop = null;
+    private int                   currentFloor = 0;
+    private static int            floorVisited = 0;
+    public static List<Customer>  registerList = new ArrayList<Customer>();
+    private ListIterator<Integer> floorsToStop = null;
 
     /**
      * Class constructor.
@@ -22,39 +22,24 @@ public class Elevator {
      * @throws Exception
      */
     public Elevator(ArrayList<Customer> customerList) throws Exception {
-
-        // boolean allCustomersHaveArrived = false;
-        //
-        // while (allCustomersHaveArrived) {
-        // for (Customer customer : customerList) {
-        // if (customer.getRideState().getFlagDescription() != "Arrived") {
-        // return;
-        // }
-        // }
+        floorsToStop = getFloorsToStop(customerList);
         move(customerList);
-        // }
     }
 
     private void move (ArrayList<Customer> customerList) throws Exception {
 
-        floorsToStop = getFloorsToStop(customerList);
+        while (floorsToStop.hasNext()) {
+            currentFloor = floorsToStop.next();
+            floorVisited++;
+            System.out.println("Current floor: " + currentFloor);
 
-        for (Customer c : customerList) {
-            if ((Integer.parseInt(c.getAtFloorNumber()) == currentFloor)
-                    && c.getRideState().getFlagDescription() != "Arrived") {
-
-                c.move();
-                c.pressElevatorButton();
-                floorsToStop.add(Integer.parseInt(c.getToFloorNumber()));
-            }
-        }
-
-        Iterator<Integer> iterator = floorsToStop.iterator();
-
-        while (iterator.hasNext()
-                && (currentFloor != Building.highestFloorNumber)) {
             for (Customer c : customerList) {
-                if ((Integer.parseInt(c.getAtFloorNumber()) == currentFloor)
+                if (((c.getToFloorNumber() != null) && Integer.parseInt(c
+                        .getToFloorNumber()) == currentFloor)
+                        && (c.getRideState().getFlagDescription() != "Arrived")) {
+
+                    c.move();
+                } else if ((Integer.parseInt(c.getAtFloorNumber()) == currentFloor)
                         && c.getRideState().getFlagDescription() != "Arrived") {
 
                     c.move();
@@ -62,19 +47,20 @@ public class Elevator {
                     floorsToStop.add(Integer.parseInt(c.getToFloorNumber()));
                 }
             }
-            currentFloor++;
         }
+        System.out.println("\nTotal number of floor visited: " + floorVisited);
     }
 
-    private TreeSet<Integer> getFloorsToStop (ArrayList<Customer> customerList) {
-        floorsToStop = new TreeSet<Integer>();
+    private ListIterator<Integer> getFloorsToStop (
+            ArrayList<Customer> customerList) {
+        List<Integer> tempFloorsToStop = new ArrayList<Integer>();
 
         for (Customer c : customerList) {
             if (c.getRideState().getFlagDescription() != "Arrived") {
-                floorsToStop.add(Integer.parseInt(c.getAtFloorNumber()));
+                tempFloorsToStop.add(Integer.parseInt(c.getAtFloorNumber()));
             }
         }
-        return floorsToStop;
+        return floorsToStop = tempFloorsToStop.listIterator();
     }
 
     /**
@@ -107,14 +93,4 @@ public class Elevator {
 
         return x;
     }
-
-    // List of Customers with given IDs to be used when letting Customers on/off
-    // the Elevator at a given floor
-    // Integer[] ids = {1, 2, 4, 8};
-    // List<Customer> matchingCustomer =
-    // Stream.of(ids).map(EmployeeUtils::findById).collect(toList());
-    // Intermediate Operations filter excludes all elements that don’t match
-    // a Predicate.
-    // Map performs a one-­‐to-­‐one transformation of
-    // elements using a Function.
 }
