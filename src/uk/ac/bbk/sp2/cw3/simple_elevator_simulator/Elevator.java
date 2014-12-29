@@ -12,27 +12,27 @@ import java.util.Random;
  *
  */
 public class Elevator {
-    private static final int     NUM_OF_FLOORS = Building.numOfFloors;
     private int                  currentFloor  = 0;
     private int                  floorVisited  = 0;
     public static List<Customer> registerList  = new ArrayList<Customer>();
 
     /** 
      * Class constructor.
+     * @param customerList 
      */
-    public Elevator() {
+    public Elevator(ArrayList<Customer> customerList) {
 
     }
 
     /**
      * @return the atFloorNumber or toFloorNumber
      */
-    public static String getFloorNumber (Customer customer) {
-        return setFloorNumber(customer);
+    public static String getFloorNumber (Customer c) {
+        return setFloorNumber(c);
     }
 
-    private static String setFloorNumber (Customer customer) {
-        int max = Building.HIGHEST_FLOOR_NUMBER;
+    private static String setFloorNumber (Customer c) {
+        int max = Building.highestFloorNumber;
         int min = Building.lOWEST_FLOOR_NUMBER;
 
         Random r = new Random();
@@ -41,7 +41,7 @@ public class Elevator {
         String x = Integer.toString(min + r.nextInt(max - min + 1));
 
         // Current floor
-        String y = customer.getAtFloorNumber();
+        String y = c.getAtFloorNumber();
 
         // Floor to ignore
         String z = Integer.toString(Building.FLOOR_TO_IGNORE);
@@ -50,7 +50,7 @@ public class Elevator {
         // number for the toFloorNumber variable is not the same as the floor
         // from which the customer is calling the elevator and that the random
         // number is not a floor that the Building class requests to ignore.
-        x = (x.equals(y) || x.equals(z)) ? setFloorNumber(customer) : x;
+        x = (x.equals(y) || x.equals(z)) ? setFloorNumber(c) : x;
 
         return x;
     }
