@@ -3,7 +3,7 @@
  */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -11,6 +11,10 @@ import java.util.Scanner;
  *
  */
 public class Controller {
+
+    int     numOfFloors;
+    int     numOfCustomers;
+    Scanner input = new Scanner(System.in);
 
     /**
      * Asks user input to obtain the number of floors the building needs to have
@@ -20,39 +24,47 @@ public class Controller {
      * simulations is started.
      */
     public Controller() {
+        String notANumber = "What you typed was not a number. Good bye!";
 
-        int numOfFloors = 0;
-        int numOfCustomers = 0;
-
-        Scanner input = new Scanner(System.in);
         try {
-            System.out
-                    .println("Entyer the number of floors you wish the building to have: ");
-            numOfFloors = input.nextInt();
-
-            System.out
-                    .println("Enter the number of customers you wish the elevator to have: ");
-            numOfCustomers = input.nextInt();
-
-        } catch (NumberFormatException exception) {
-            System.out.println("Input was not a valid number.");
+            String s = "Enter the number of floors (from 1 to 100) you wish the building to have: ";
+            numOfFloors = getUserInput(s);
+        } catch (InputMismatchException exception) {
+            System.out.println(notANumber);
+            input.close();
+            return;
+        }
+        try {
+            String s = "Enter the number of customers (from 1 to 100) you wish the elevator to have: ";
+            numOfCustomers = getUserInput(s);
+        } catch (InputMismatchException exception) {
+            System.out.println(notANumber);
+            input.close();
+            return;
         } finally {
             input.close();
         }
 
-        // A customer list is created with number of customers decided by user
-        ArrayList<Customer> customerList = new ArrayList<Customer>();
-        int count = 1;
-        while(count <= numOfCustomers){
-            try {
-                customerList.add(new Customer());
-            } catch (Exception e) {
-                System.err.println("Customer could not be created");
-            }
-            count++;
-        }
+        new Building(numOfFloors, numOfCustomers);
+    }
 
-        new Building(numOfFloors, customerList);
+    /**
+     * Checks if number input from the user is within range 1 to 100 and if it
+     * is not, the user is prompted to enter another number
+     * 
+     * @param s
+     *            the message prompting the user to enter a number of floors and
+     *            customers
+     * @return either the number of floors the building will have or the number
+     *         of customers the elevator will have
+     */
+    private int getUserInput (String s) {
+        String errText = "The number must be between 1 and 100. Enter another nubmer: ";
+        System.out.println(s);
+        int x = input.nextInt();
+
+        x = ((x < 1) || (x > 100) ? getUserInput(errText) : x);
+        return x;
     }
 
     public static void main (String[] args) {

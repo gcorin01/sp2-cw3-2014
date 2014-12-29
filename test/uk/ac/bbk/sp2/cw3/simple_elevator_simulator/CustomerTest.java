@@ -87,7 +87,7 @@ public class CustomerTest {
     public void testCustomerAtFloorNumberIsNotOutOfRangeHighest () throws Exception {
         Customer customer4 = new Customer();
 
-        int max = Building.HIGHEST_FLOOR_NUMBER;
+        int max = Building.highestFloorNumber;
         int toFloorN = Integer.parseInt(customer4.getAtFloorNumber());
 
         assertFalse(toFloorN > max);
@@ -130,7 +130,7 @@ public class CustomerTest {
         customer8.move();
         customer8.getRideState().pressElevatorButton(customer8);
 
-        int max = Building.HIGHEST_FLOOR_NUMBER;
+        int max = Building.highestFloorNumber;
         int toFloorN = Integer.parseInt(customer8.getToFloorNumber());
 
         assertFalse(toFloorN > max);

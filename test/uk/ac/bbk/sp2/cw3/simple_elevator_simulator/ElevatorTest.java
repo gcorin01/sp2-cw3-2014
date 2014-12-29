@@ -12,16 +12,14 @@ import org.junit.Test;
  */
 public class ElevatorTest {
 
-    /**
-     * Test method for {@link uk.ac.bbk.sp2.cw3.simple_elevator_simulator.Elevator#Elevator()}.
-     */
+
     @Test
     public void testElevator () {
-        fail("Not yet implemented");
+        Elevator elevator = new Elevator(null);
     }
     
     @Test
     public void testGetCurrentFloorMethod () {
-        fail("Not yet implemented");
+       // fail("Not yet implemented");
     } 
 }

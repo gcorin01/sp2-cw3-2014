@@ -21,6 +21,12 @@ public class Elevator {
      * @param customerList 
      */
     public Elevator(ArrayList<Customer> customerList) {
+        
+        customerList
+        .stream()
+        .filter(s -> s.getAtFloorNumber() == String.valueOf(currentFloor))
+        .sorted()
+        .forEach(System.out::println);
 
     }
 

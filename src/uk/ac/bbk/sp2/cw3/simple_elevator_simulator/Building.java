@@ -21,12 +21,23 @@ public class Building {
 
     /**
      * @param numOfFloors
-     * @param customerList 
+     * @param numOfCustomers 
      */
-    public Building(int numOfFloors, ArrayList<Customer> customerList) {
+    public Building(int numOfFloors, int numOfCustomers) {
         setNumberOfFloors(numOfFloors);
         setHighestFloorNumber();
 
+        // A customer list is created with number of customers decided by user
+        ArrayList<Customer> customerList = new ArrayList<Customer>();
+        int count = 1;
+        while(count <= numOfCustomers){
+            try {
+                customerList.add(new Customer());
+            } catch (Exception e) {
+                System.err.println("Customer could not be created");
+            }
+            count++;
+        }
         new Elevator(customerList);
     }
 
