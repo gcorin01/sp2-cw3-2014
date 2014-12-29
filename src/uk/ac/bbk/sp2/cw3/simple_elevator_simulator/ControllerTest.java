@@ -2,8 +2,6 @@ package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
 
-import org.hamcrest.core.IsInstanceOf;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -11,7 +9,7 @@ public class ControllerTest {
     static Controller controller;
     
     @BeforeClass
-    public static void createControllerClass () {
+    public static void createControllerClass () throws Exception {
         controller = new Controller();
     }
 

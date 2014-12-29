@@ -20,17 +20,24 @@ public class Building {
     public static int       highestFloorNumber  = 0;
 
     /**
+     * Sets the highest floor number the building has so that it can be used for
+     * the generation of the random floor numbers
+     * 
+     * Creates a list of customers which is then passed to the Elevator class
+     * while initiating it
+     * 
      * @param numOfFloors
-     * @param numOfCustomers 
+     * @param numOfCustomers
+     * @throws Exception 
      */
-    public Building(int numOfFloors, int numOfCustomers) {
+    public Building(int numOfFloors, int numOfCustomers) throws Exception {
         setNumberOfFloors(numOfFloors);
         setHighestFloorNumber();
 
         // A customer list is created with number of customers decided by user
         ArrayList<Customer> customerList = new ArrayList<Customer>();
         int count = 1;
-        while(count <= numOfCustomers){
+        while (count <= numOfCustomers) {
             try {
                 customerList.add(new Customer());
             } catch (Exception e) {
@@ -38,6 +45,7 @@ public class Building {
             }
             count++;
         }
+
         new Elevator(customerList);
     }
 
@@ -45,10 +53,12 @@ public class Building {
         Building.numOfFloors = numOfFloors;
     }
 
+    /**
+     * @return the building highest floor adding 1 floor when the building has
+     *         13 or more floors because floor 13 is ignored
+     */
     private int setHighestFloorNumber () {
-        // Adding 1 floor to the highest floor number variable only when the
-        // building has 13 or more floors
-        int x = numOfFloors; 
+        int x = numOfFloors;
         int y = FLOOR_TO_IGNORE;
         int z = lOWEST_FLOOR_NUMBER;
 

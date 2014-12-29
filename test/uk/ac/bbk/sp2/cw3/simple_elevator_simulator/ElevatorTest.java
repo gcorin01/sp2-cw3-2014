@@ -4,6 +4,8 @@
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
 import static org.junit.Assert.*;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -12,10 +14,11 @@ import org.junit.Test;
  */
 public class ElevatorTest {
 
-
-    @Test
-    public void testElevator () {
-        Elevator elevator = new Elevator(null);
+    static Controller controller;
+    
+    @BeforeClass
+    public static void createControllerClass () throws Exception {
+        controller = new Controller();
     }
     
     @Test

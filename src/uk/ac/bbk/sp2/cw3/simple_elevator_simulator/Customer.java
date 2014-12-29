@@ -34,6 +34,9 @@ public class Customer {
      * Class constructor.
      */
     public Customer() throws Exception {
+        if (count == 0) {
+            System.out.println("Thanks. Now the elevator simulation begins:\n");
+        };
         count++;
         setId(count);
 

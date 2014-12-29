@@ -22,12 +22,13 @@ public class Controller {
      * 
      * It creates a list of customers and constructs the building before the
      * simulations is started.
+     * @throws Exception 
      */
-    public Controller() {
+    public Controller() throws Exception {
         String notANumber = "What you typed was not a number. Good bye!";
 
         try {
-            String s = "Enter the number of floors (from 1 to 100) you wish the building to have: ";
+            String s = "Enter the number of FLOORS (from 1 to 100) you wish the building to have: ";
             numOfFloors = getUserInput(s);
         } catch (InputMismatchException exception) {
             System.out.println(notANumber);
@@ -35,7 +36,7 @@ public class Controller {
             return;
         }
         try {
-            String s = "Enter the number of customers (from 1 to 100) you wish the elevator to have: ";
+            String s = "Great! \nNow enter the number of CUSTOMERS (from 1 to 100) you wish the elevator to have: ";
             numOfCustomers = getUserInput(s);
         } catch (InputMismatchException exception) {
             System.out.println(notANumber);
@@ -67,7 +68,7 @@ public class Controller {
         return x;
     }
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws Exception {
         new Controller();
     }
 

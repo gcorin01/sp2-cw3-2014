@@ -3,31 +3,78 @@
  */
 package uk.ac.bbk.sp2.cw3.simple_elevator_simulator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author gcorin01
  *
  */
 public class Elevator {
-    private int                  currentFloor  = 0;
-    private int                  floorVisited  = 0;
-    public static List<Customer> registerList  = new ArrayList<Customer>();
+    private int                  currentFloor = 0;
+    private int                  floorVisited = 0;
+    public static List<Customer> registerList = new ArrayList<Customer>();
+    private TreeSet<Integer>     floorsToStop = null;
 
-    /** 
+    /**
      * Class constructor.
-     * @param customerList 
+     * 
+     * @param customerList
+     * @throws Exception
      */
-    public Elevator(ArrayList<Customer> customerList) {
-        
-        customerList
-        .stream()
-        .filter(s -> s.getAtFloorNumber() == String.valueOf(currentFloor))
-        .sorted()
-        .forEach(System.out::println);
+    public Elevator(ArrayList<Customer> customerList) throws Exception {
 
+        // boolean allCustomersHaveArrived = false;
+        //
+        // while (allCustomersHaveArrived) {
+        // for (Customer customer : customerList) {
+        // if (customer.getRideState().getFlagDescription() != "Arrived") {
+        // return;
+        // }
+        // }
+        move(customerList);
+        // }
+    }
+
+    private void move (ArrayList<Customer> customerList) throws Exception {
+
+        floorsToStop = getFloorsToStop(customerList);
+
+        for (Customer c : customerList) {
+            if ((Integer.parseInt(c.getAtFloorNumber()) == currentFloor)
+                    && c.getRideState().getFlagDescription() != "Arrived") {
+
+                c.move();
+                c.pressElevatorButton();
+                floorsToStop.add(Integer.parseInt(c.getToFloorNumber()));
+            }
+        }
+
+        Iterator<Integer> iterator = floorsToStop.iterator();
+
+        while (iterator.hasNext()
+                && (currentFloor != Building.highestFloorNumber)) {
+            for (Customer c : customerList) {
+                if ((Integer.parseInt(c.getAtFloorNumber()) == currentFloor)
+                        && c.getRideState().getFlagDescription() != "Arrived") {
+
+                    c.move();
+                    c.pressElevatorButton();
+                    floorsToStop.add(Integer.parseInt(c.getToFloorNumber()));
+                }
+            }
+            currentFloor++;
+        }
+    }
+
+    private TreeSet<Integer> getFloorsToStop (ArrayList<Customer> customerList) {
+        floorsToStop = new TreeSet<Integer>();
+
+        for (Customer c : customerList) {
+            if (c.getRideState().getFlagDescription() != "Arrived") {
+                floorsToStop.add(Integer.parseInt(c.getAtFloorNumber()));
+            }
+        }
+        return floorsToStop;
     }
 
     /**
